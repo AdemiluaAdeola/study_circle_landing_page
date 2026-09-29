@@ -1,0 +1,2652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>StudyCircle — tutors you book, an AI that drills your weak spots (JAMB · WAEC · NECO)</title>
+<meta name="description" content="StudyCircle pairs verified Nigerian tutors — bookable from ₦1,000 a session under escrow — with an adaptive AI engine that drills the topics you keep missing and explains every miss against the syllabus it cites. Pilot opening for JAMB, WAEC and NECO students.">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#0F5B44">
+<meta property="og:type" content="website">
+<meta property="og:title" content="StudyCircle — your weak spots, circled. Then crossed out.">
+<meta property="og:description" content="Verified tutors from ₦1,000 a session, money held in escrow, plus an adaptive AI engine that never lets go of a topic you keep failing.">
+<meta property="og:locale" content="en_NG">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='13' fill='%230F5B44'/%3E%3Ccircle cx='16' cy='16' r='5' fill='%23FFE066'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Fonts are progressive enhancement only: the page is fully usable, readable and styled without them. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=JetBrains+Mono:wght@400;700&family=Caveat:wght@500..700&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@400..700&family=JetBrains+Mono:wght@400;700&family=Caveat:wght@500..700&display=swap"></noscript>
+<style>
+/* ==========================================================================
+   StudyCircle landing page — hand-built, no build step, no external JS.
+   1 tokens · 2 base · 3 type · 4 buttons · 5 correction marks · 6 nav
+   7 reveal · 8 hero · 9 sections · 10 booking flow · 11 AI inspector
+   12 adaptive demo · 13 tutors/payout · 14 pricing/metrics/scope
+   15 FAQ/join/footer · 16 responsive · 17 motion + print
+   ========================================================================== */
+/* ---------- 1. tokens ---------- */
+:root{
+  --paper:#F4F5F1; --paper-2:#E9ECE4; --card:#FFFFFF;
+  --ink:#141814; --ink-2:#5B635C; --ink-3:#8B938B;
+  --brand:#0F5B44; --brand-2:#12785A; --brand-deep:#08291F; --brand-lite:#E3F0E9;
+  --accent:#DE5A28; --accent-lite:#FBEDE6;
+  --marker:#FFE066; --pen:#C4301E;
+  --line:#D8DDD3; --line-2:#C3CABF;
+  --night:#0A1913; --night-2:#122B20; --cream:#EFF3ED;
+  --shadow:rgba(16,32,24,.16);
+  --ff-d:'Instrument Serif',Georgia,'Times New Roman',serif;
+  --ff-u:'Instrument Sans',system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;
+  --ff-m:'JetBrains Mono',ui-monospace,'Cascadia Mono',Consolas,'Courier New',monospace;
+  --ff-h:'Caveat','Segoe Script','Bradley Hand',cursive;
+  --wrap:1140px; --r:8px;
+}
+
+/* ---------- 2. base ---------- */
+*,*::before,*::after{box-sizing:border-box}
+*{margin:0}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:96px}
+body{font:400 1rem/1.65 var(--ff-u);color:var(--ink);background:var(--paper);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+img,svg{display:block;max-width:100%}
+button,input,select{font:inherit;color:inherit}
+button{background:none;border:none;cursor:pointer}
+a{color:inherit}
+h1,h2,h3,h4{font-weight:400;line-height:1.1}
+ul,ol{list-style:none;padding:0}
+::selection{background:var(--marker);color:var(--ink)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:2px}
+[hidden]{display:none!important}
+.skip{position:absolute;left:-9999px;top:0;z-index:99;background:var(--ink);color:var(--cream);padding:.7rem 1rem;font-weight:600}
+.skip:focus{left:12px;top:12px}
+.sprite{position:absolute;width:0;height:0;overflow:hidden}
+.wrap{width:min(var(--wrap),92vw);margin-inline:auto}
+.wrap--tight{width:min(860px,92vw);margin-inline:auto}
+.sr{position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+/* ---------- 3. type ---------- */
+.d{font-family:var(--ff-d);font-weight:400;letter-spacing:-.012em}
+.h1{font-family:var(--ff-d);font-size:clamp(2.35rem,5.4vw,4.35rem);line-height:1.02;letter-spacing:-.022em}
+.h2{font-family:var(--ff-d);font-size:clamp(1.95rem,3.5vw,2.95rem);line-height:1.07;letter-spacing:-.018em}
+.h3{font-family:var(--ff-d);font-size:clamp(1.22rem,1.7vw,1.55rem);line-height:1.22}
+.h4{font-weight:600;font-size:1.02rem;line-height:1.35}
+.lede{color:var(--ink-2);font-size:clamp(1rem,1.25vw,1.1rem);max-width:64ch}
+.sec--night .lede,.sec--brand .lede{color:rgba(239,243,237,.78)}
+.small{font-size:.9rem;color:var(--ink-2);line-height:1.6}
+.sec--night .small,.sec--brand .small{color:rgba(239,243,237,.68)}
+.mono{font-family:var(--ff-m);font-size:.76rem;letter-spacing:.05em}
+.tag{font-family:var(--ff-m);font-weight:700;font-size:.65rem;letter-spacing:.18em;text-transform:uppercase}
+.hand{font-family:var(--ff-h);font-size:1.3rem;line-height:1.25;color:var(--pen)}
+.eyebrow{display:inline-flex;align-items:center;gap:.6rem;font-family:var(--ff-m);font-weight:700;font-size:.67rem;letter-spacing:.2em;text-transform:uppercase;color:var(--brand)}
+.eyebrow::before{content:'';width:.5rem;height:.5rem;border-radius:50%;background:var(--marker);box-shadow:0 0 0 2px currentColor;flex:none}
+.sec--night .eyebrow,.sec--brand .eyebrow{color:#83D3AE}
+.num{font-family:var(--ff-d);font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.hl{background:linear-gradient(180deg,transparent 58%,var(--marker) 58%);padding:0 .1em}
+.dim-link{border-bottom:1.5px solid var(--line-2);text-decoration:none;padding-bottom:1px}
+.dim-link:hover{border-color:var(--accent);color:var(--accent)}
+/* ---------- 4. buttons ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.55rem;padding:.82rem 1.25rem;
+  border:2px solid var(--ink);border-radius:var(--r);background:var(--ink);color:var(--cream);
+  font-weight:600;font-size:.94rem;text-decoration:none;transition:transform .16s ease,box-shadow .16s ease,background .18s ease,color .18s ease}
+.btn .ic{width:1.05rem;height:1.05rem;flex:none}
+.btn:hover{transform:translateY(-2px);box-shadow:0 7px 0 -2px var(--shadow)}
+.btn:active{transform:translateY(1px);box-shadow:none}
+.btn--accent{background:var(--accent);color:#fff}
+.btn--marker{background:var(--marker);color:var(--ink)}
+.btn--ghost{background:var(--card);color:var(--ink);border-color:var(--line-2)}
+.btn--ghost:hover{border-color:var(--ink)}
+.btn--sm{padding:.58rem 1rem;font-size:.87rem}
+.btn--block{width:100%}
+.btn[disabled],.btn[aria-disabled="true"]{opacity:.45;pointer-events:none}
+.sec--night .btn--ghost{background:rgba(255,255,255,.04);color:var(--cream);border-color:#2E5343}
+.sec--night .btn--ghost:hover{border-color:var(--cream)}
+.icon-btn{width:38px;height:38px;flex:none;display:grid;place-items:center;border:1.5px solid var(--line-2);
+  border-radius:var(--r);background:var(--card);color:var(--ink);transition:.15s}
+.icon-btn:hover{border-color:var(--ink);background:var(--marker)}
+.icon-btn .ic{width:1rem;height:1rem}
+.ic{width:1.15rem;height:1.15rem;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+/* ---------- 5. correction marks (the brand's handwriting) ---------- */
+.circ{position:relative;display:inline-block;white-space:nowrap}
+.circ>svg{position:absolute;left:-7%;top:-24%;width:114%;height:148%;overflow:visible;pointer-events:none}
+.circ>svg path{fill:none;stroke:var(--pen);stroke-width:3;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1}
+.in .circ>svg path{animation:draw .95s ease .4s forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+.strike{position:relative;display:inline-block}
+.strike::before,.strike::after{content:'';position:absolute;left:-4%;right:-4%;height:3px;background:var(--pen);
+  border-radius:3px;transform:scaleX(0) rotate(-1.5deg);transform-origin:left center}
+.strike::before{top:41%}
+.strike::after{top:59%}
+.in .strike::before{animation:strike .36s ease 1.15s forwards}
+.in .strike::after{animation:strike .36s ease 1.4s forwards}
+@keyframes strike{to{transform:scaleX(1) rotate(-1.5deg)}}
+
+/* ---------- 6. nav ---------- */
+.nav{position:sticky;top:0;z-index:60;background:rgba(244,245,241,.88);backdrop-filter:blur(10px);
+  border-bottom:1.5px solid transparent;transition:border-color .25s,background .25s}
+.nav.is-stuck{border-bottom-color:var(--line);background:rgba(244,245,241,.97)}
+.prog{position:absolute;left:0;bottom:-1.5px;height:2px;width:0;background:var(--accent);transition:width .1s linear}
+.nav-in{display:flex;align-items:center;gap:clamp(10px,2vw,26px);height:76px}
+.brand{display:inline-flex;align-items:center;gap:.55rem;font-family:var(--ff-d);font-size:1.34rem;
+  letter-spacing:-.015em;text-decoration:none;color:var(--ink)}
+.brand-mark{width:26px;height:26px;flex:none;border-radius:50%;background:var(--brand);display:grid;place-items:center}
+.brand-mark::after{content:'';width:9px;height:9px;border-radius:50%;background:var(--marker)}
+.nav-links{display:flex;gap:1.15rem;margin-left:auto}
+.nav-links a{position:relative;font-size:.89rem;font-weight:500;color:var(--ink-2);text-decoration:none;padding:.4rem 0}
+.nav-links a::after{content:'';position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--accent);
+  transform:scaleX(0);transform-origin:left;transition:transform .22s}
+.nav-links a:hover,.nav-links a.is-active{color:var(--ink)}
+.nav-links a:hover::after,.nav-links a.is-active::after{transform:scaleX(1)}
+.nav-cta{display:flex;align-items:center;gap:.75rem}
+.burger{display:none;width:44px;height:44px;padding:11px 10px;flex-direction:column;justify-content:space-between;
+  border:1.5px solid var(--line-2);border-radius:var(--r);background:var(--card)}
+.burger span{display:block;height:2.5px;background:var(--ink);transition:transform .3s,opacity .3s}
+.burger.is-x span:nth-child(1){transform:translateY(8px) rotate(45deg)}
+.burger.is-x span:nth-child(2){opacity:0}
+.burger.is-x span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
+.mnav{position:fixed;inset:76px 0 auto;z-index:55;background:var(--paper);border-bottom:1.5px solid var(--ink);
+  padding:1rem 4vw 1.75rem;display:grid;gap:.25rem;visibility:hidden;opacity:0;transform:translateY(-8px);transition:.28s}
+.mnav.is-open{visibility:visible;opacity:1;transform:none}
+.mnav a{font-family:var(--ff-d);font-size:1.3rem;text-decoration:none;padding:.7rem 0;border-bottom:1px dashed var(--line)}
+.mnav .btn{margin-top:1rem}
+
+/* ---------- 7. reveal ---------- */
+[data-reveal]{opacity:0;transform:translateY(22px);transition:opacity .65s ease,transform .65s cubic-bezier(.2,.8,.2,1);transition-delay:var(--d,0ms)}
+[data-reveal].in{opacity:1;transform:none}
+
+/* ---------- 7b. mobile sticky CTA ---------- */
+.mcta{position:fixed;left:0;right:0;bottom:0;z-index:58;display:none;gap:.6rem;align-items:center;
+  padding:.7rem 4vw calc(.7rem + env(safe-area-inset-bottom));background:rgba(10,25,19,.97);color:var(--cream);
+  border-top:1.5px solid var(--night-2);transform:translateY(110%);transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+.mcta.is-up{transform:none}
+.mcta p{font-size:.8rem;line-height:1.35;margin-right:auto;color:rgba(239,243,237,.75)}
+.mcta b{display:block;color:var(--cream);font-size:.9rem}
+/* ---------- 8. hero ---------- */
+.hero{position:relative;padding:clamp(52px,6vw,86px) 0 clamp(58px,6vw,92px);
+  background:linear-gradient(180deg,var(--card) 0%,var(--paper) 100%)}
+.hero::after{content:'';position:absolute;inset:auto 0 0;height:1.5px;background:var(--line)}
+.hero-grid{display:grid;grid-template-columns:1.02fr .98fr;gap:clamp(32px,4vw,60px);align-items:center}
+.badge{display:inline-flex;align-items:center;gap:.6rem;border:1.5px solid var(--line-2);border-radius:999px;
+  background:var(--card);padding:.5rem .9rem;font-family:var(--ff-m);font-weight:700;font-size:.64rem;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--ink-2)}
+.pulse{width:.5rem;height:.5rem;border-radius:50%;background:var(--brand-2);flex:none;animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(18,120,90,.5)}70%{box-shadow:0 0 0 8px rgba(18,120,90,0)}}
+.hero h1{margin:1.35rem 0 .35rem}
+.hero .hand{margin:.1rem 0 1.15rem;transform:rotate(-1.6deg)}
+.hero-sub{max-width:54ch;color:var(--ink-2);font-size:clamp(1rem,1.3vw,1.1rem)}
+.hero-cta{display:flex;flex-wrap:wrap;gap:.85rem;margin:1.75rem 0 1.6rem}
+.proofs{display:grid;gap:.55rem;max-width:33rem}
+.proof{display:grid;grid-template-columns:1.15rem 1fr;gap:.65rem;align-items:start;font-size:.92rem;color:var(--ink-2)}
+.proof .ic{width:1.15rem;height:1.15rem;color:var(--brand);margin-top:.15rem}
+.proof b{color:var(--ink);font-weight:600}
+
+/* hero thread card */
+.hero-visual{position:relative}
+.thread{background:var(--card);border:1.5px solid var(--ink);border-radius:14px;overflow:hidden;
+  box-shadow:0 26px 50px -34px rgba(10,25,19,.55)}
+.thread-top{display:grid;grid-template-columns:auto 1fr;gap:.8rem;align-items:center;padding:.95rem 1rem;
+  border-bottom:1.5px solid var(--line);background:var(--paper-2)}
+.ava{width:44px;height:44px;border-radius:50%;background:var(--brand);color:var(--cream);display:grid;place-items:center;
+  font-family:var(--ff-d);font-size:1.15rem;flex:none}
+.thread-who{min-width:0;line-height:1.3}
+.thread-who b{display:block;font-size:.97rem;font-weight:600}
+.thread-who .mono{color:var(--ink-3);display:block;font-size:.68rem;margin-top:.15rem}
+.thread-actions{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:.45rem;align-items:center;padding-top:.75rem;border-top:1px dashed var(--line)}
+.chip{display:inline-flex;align-items:center;gap:.35rem;border:1.5px solid var(--line-2);border-radius:999px;
+  background:var(--card);padding:.28rem .6rem;font-family:var(--ff-m);font-size:.63rem;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2)}
+.chip .ic{width:.85rem;height:.85rem}
+.chip--ok{border-color:var(--brand-2);color:var(--brand);background:var(--brand-lite)}
+.chip--warn{border-color:#DFB63C;color:#8A6208;background:#FDF6E0}
+.thread-actions .icon-btn{margin-left:auto}
+.thread-log{height:326px;overflow-y:auto;padding:1.05rem 1rem;scroll-behavior:smooth;background:var(--card)}
+.tmsg{max-width:85%;padding:.6rem .85rem;border-radius:12px;margin-bottom:.65rem;font-size:.92rem;line-height:1.5;
+  background:var(--paper-2);color:var(--ink);animation:pop .32s cubic-bezier(.3,1.3,.5,1)}
+@keyframes pop{from{opacity:0;transform:translateY(7px) scale(.97)}}
+.tmsg--me{margin-left:auto;background:var(--brand);color:var(--cream);border-bottom-right-radius:3px}
+.tmsg--tutor{border-bottom-left-radius:3px}
+.tmsg--ai{background:var(--brand-lite);border:1.5px solid var(--brand-2);max-width:92%}
+.hero-note{position:absolute;top:-2.4rem;right:0;z-index:2;max-width:15rem;text-align:right;transform:rotate(2deg)}
+.hero-note svg{width:60px;height:54px;margin:.15rem .6rem 0 auto;stroke:var(--accent);fill:none;stroke-width:2.6;
+  stroke-linecap:round;stroke-linejoin:round}
+/* ---------- 8b. thread internals ---------- */
+.ai-head{display:flex;align-items:center;gap:.35rem;font-family:var(--ff-m);font-weight:700;font-size:.63rem;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--brand);margin-bottom:.4rem}
+.ai-head .ic{width:.85rem;height:.85rem}
+.tmsg .src{display:inline-flex;align-items:center;gap:.35rem;margin-top:.55rem;padding:.3rem .55rem;border-radius:4px;
+  border:1.5px solid var(--brand-2);background:var(--card);color:var(--brand);font-family:var(--ff-m);
+  font-size:.6rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.tmsg .src .ic{width:.8rem;height:.8rem}
+.tevent{margin:.6rem auto;padding:.4rem .8rem;border:1.5px dashed var(--brand-2);border-radius:999px;background:var(--brand-lite);
+  font-family:var(--ff-m);font-size:.62rem;font-weight:700;letter-spacing:.1em;color:var(--brand);text-align:center;width:fit-content}
+.tt{display:flex;gap:.25rem;padding:.7rem .9rem;width:fit-content;margin-bottom:.65rem;background:var(--paper-2);border-radius:12px}
+.tt--me{margin-left:auto;background:var(--brand)}
+.tt span{width:6px;height:6px;border-radius:50%;background:var(--ink-3);animation:blink 1s infinite}
+.tt--me span{background:var(--cream)}
+.tt span:nth-child(2){animation-delay:.16s}
+.tt span:nth-child(3){animation-delay:.32s}
+@keyframes blink{0%,100%{opacity:.25;transform:translateY(0)}50%{opacity:1;transform:translateY(-3px)}}
+.thread-form{display:flex;gap:.55rem;padding:.8rem;border-top:1.5px solid var(--line);background:var(--paper-2)}
+.thread-form input{flex:1;min-width:0;border:1.5px solid var(--line-2);border-radius:var(--r);background:var(--card);
+  padding:.65rem .8rem;font-size:.92rem}
+.thread-form input::placeholder{color:var(--ink-3)}
+.send{width:44px;height:44px;flex:none;display:grid;place-items:center;border:1.5px solid var(--ink);border-radius:var(--r);
+  background:var(--accent);color:#fff;transition:.15s}
+.send:hover{transform:translateY(-2px)}
+.thread-foot{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:space-between;margin-top:.7rem;font-family:var(--ff-m);
+  font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+
+/* ---------- 8c. syllabus ticker ---------- */
+.ticker{background:var(--night);color:var(--cream);overflow:hidden;padding:.8rem 0;border-block:1.5px solid var(--night)}
+.tick-track{display:flex;width:max-content;animation:tick 46s linear infinite}
+.ticker:hover .tick-track{animation-play-state:paused}
+.tick-set{display:flex;white-space:nowrap;font-family:var(--ff-m);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase}
+.tick-set span{padding:0 1rem}
+.tick-set em{font-style:normal;color:var(--marker)}
+.tick-set .k{color:#83D3AE}
+@keyframes tick{to{transform:translateX(-50%)}}
+/* ---------- 9. section chrome ---------- */
+.sec{padding:clamp(60px,7vw,104px) 0;position:relative}
+.sec--alt{background:var(--paper-2)}
+.sec--card{background:var(--card)}
+.sec--night{background:var(--night);color:var(--cream)}
+.sec--night::selection{background:var(--marker);color:var(--ink)}
+.sec--brand{background:var(--brand);color:var(--cream)}
+.sec-head{max-width:64rem}
+.chapter{display:flex;align-items:center;gap:.8rem;margin-bottom:1.1rem}
+.chapter .tag{color:var(--accent);flex:none}
+.sec--night .chapter .tag,.sec--brand .chapter .tag{color:var(--marker)}
+.chapter::after{content:'';flex:1;height:1.5px;background:var(--line)}
+.sec--night .chapter::after,.sec--brand .chapter::after{background:rgba(239,243,237,.2)}
+.sec-head .h2{margin-bottom:.85rem}
+.sec-head .lede{margin-bottom:0}
+.g2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(18px,2.4vw,32px)}
+.g3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(16px,2vw,26px)}
+.g4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(14px,1.6vw,22px)}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,4vw,64px);align-items:center}
+.split--wide{grid-template-columns:1.08fr .92fr}
+.mt-l{margin-top:clamp(34px,4vw,54px)}
+.mt-m{margin-top:clamp(20px,2.4vw,32px)}
+
+/* ---------- 9b. problem: two bad options ---------- */
+.opt-card{position:relative;background:var(--card);border:1.5px solid var(--line);border-radius:var(--r);
+  padding:1.6rem 1.6rem 1.5rem;display:flex;flex-direction:column;gap:.6rem}
+.opt-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;border-radius:var(--r) 0 0 var(--r);background:var(--line-2)}
+.opt-card--bad::before{background:var(--accent)}
+.opt-card .tag{color:var(--ink-3)}
+.opt-card .h3{margin-bottom:.2rem}
+.xlist{display:grid;gap:.7rem;margin-top:.35rem}
+.xlist li{position:relative;color:var(--ink-2);font-size:.95rem;padding-left:1.3rem}
+.xlist li::before{content:'';position:absolute;left:0;top:.62em;width:.7rem;height:1.5px;background:var(--pen);transform:rotate(-12deg)}
+.third{position:relative;overflow:hidden;border-radius:14px;border:1.5px solid var(--brand-deep);
+  background:var(--brand);color:var(--cream);padding:clamp(24px,3vw,42px)}
+.third__glow{position:absolute;right:-60px;top:-60px;width:240px;height:240px;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,224,102,.22),transparent 68%)}
+.third .tag{display:inline-block;border:1.5px solid rgba(239,243,237,.35);border-radius:999px;padding:.3rem .7rem;color:var(--marker)}
+.third .h3{font-size:clamp(1.5rem,2.4vw,2.1rem);margin:1rem 0 .6rem}
+.third p{color:rgba(239,243,237,.82);max-width:60ch}
+.third-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(22px,3vw,44px);align-items:center;position:relative}
+.arrow-link{display:inline-flex;align-items:center;gap:.5rem;margin-top:1.25rem;font-weight:600;text-decoration:none;
+  border-bottom:2px solid var(--marker);padding-bottom:2px;transition:gap .22s}
+.arrow-link:hover{gap:.9rem}
+.arrow-link .ic{width:1rem;height:1rem}
+
+/* ---------- 9c. how it works ---------- */
+.steps{counter-reset:s;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(14px,1.6vw,22px)}
+.step{position:relative;background:var(--card);border:1.5px solid var(--line);border-radius:var(--r);padding:1.4rem 1.35rem}
+.step:hover{border-color:var(--line-2)}
+.step__n{font-family:var(--ff-d);font-size:2.4rem;line-height:1;color:var(--line-2);display:block;margin-bottom:.5rem}
+.step__ic{width:40px;height:40px;border-radius:var(--r);display:grid;place-items:center;background:var(--brand-lite);
+  color:var(--brand);margin-bottom:.85rem}
+.step__ic .ic{width:1.25rem;height:1.25rem}
+.step .tag{color:var(--accent);display:block;margin-bottom:.4rem}
+.step .h4{margin-bottom:.4rem}
+.step p{font-size:.92rem;color:var(--ink-2)}
+.step-note{margin-top:1.4rem;padding-left:1rem;border-left:3px solid var(--marker)}
+/* ---------- 9f. hand-drawn figures (the pen illustrations) ---------- */
+.il{display:block;width:100%;height:auto;overflow:visible}
+.figs{display:grid;gap:clamp(18px,2.4vw,30px)}
+.figs--2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.fig{background:var(--card);border:1.5px solid var(--line);border-radius:14px;
+  padding:clamp(16px,2.2vw,28px) clamp(16px,2.2vw,28px) clamp(14px,1.8vw,22px);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:clamp(.9rem,1.6vw,1.3rem);box-shadow:0 20px 40px -34px var(--shadow)}
+.fig .il{width:min(var(--ilw,240px),86%)}
+.fig--wide{max-width:680px;margin-inline:auto}
+.fig--wide .il{width:min(var(--ilw,520px),94%)}
+.fig figcaption{font-family:var(--ff-h);font-size:1.24rem;line-height:1.3;color:var(--pen);
+  text-align:center;text-wrap:balance}
+.fig-note{display:flex;gap:clamp(14px,2vw,24px);align-items:center;background:var(--card);
+  max-width:920px;margin-inline:auto;
+  border:1.5px solid var(--line);border-left:4px solid var(--marker);border-radius:var(--r);padding:1.15rem 1.3rem}
+.fig-note .il{width:clamp(112px,16vw,176px);flex:none}
+.fig-note p{margin:0;flex:1;max-width:62ch}
+.fig-note b{color:var(--ink)}
+
+@media (max-width:680px){
+  .figs--2{grid-template-columns:1fr}
+  .fig--wide .il{width:100%}
+}
+@media (max-width:560px){
+  .fig-note{flex-direction:column;align-items:flex-start;gap:.9rem}
+  .fig-note .il{width:124px}
+  .fig-note p{flex:none}
+}
+/* ---------- 9d. pilot subjects ---------- */
+.subjects-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,4vw,64px);align-items:center}
+.shelf{display:flex;align-items:flex-end;justify-content:center;gap:1rem;height:300px;padding:0 .8rem;
+  border-bottom:10px solid var(--cream);box-shadow:0 14px 0 -4px #04120C}
+.book{border:none;display:flex;flex-direction:column;justify-content:space-between;align-items:center;gap:.5rem;
+  padding:1.1rem .6rem .9rem;border-radius:4px 4px 0 0;cursor:pointer;color:var(--ink);
+  box-shadow:inset 6px 0 0 rgba(0,0,0,.2),inset -6px 0 0 rgba(0,0,0,.2),4px 4px 0 rgba(0,0,0,.32);
+  transition:transform .35s cubic-bezier(.2,1.2,.4,1),box-shadow .35s}
+.book:hover,.book:focus-visible{transform:translateY(-14px)}
+.book .bn{writing-mode:vertical-rl;font-family:var(--ff-d);font-size:1rem;letter-spacing:.12em}
+.book .bv{font-family:var(--ff-m);font-size:.6rem;letter-spacing:.1em;opacity:.75}
+.book .bd{width:8px;height:8px;border-radius:50%;border:2px solid currentColor}
+.book--math{width:82px;height:246px;background:var(--brand);color:var(--cream)}
+.book--eng{width:94px;height:282px;background:var(--marker)}
+.book--phy{width:70px;height:224px;background:var(--accent);color:#fff;transform:rotate(6deg);transform-origin:bottom left}
+.book--phy:hover,.book--phy:focus-visible{transform:rotate(4deg) translateY(-14px)}
+.shelf-hint{margin-top:1.5rem;text-align:center;font-family:var(--ff-m);font-size:.65rem;letter-spacing:.14em;
+  text-transform:uppercase;color:rgba(239,243,237,.5)}
+.subject-facts{display:grid;gap:.5rem;margin-top:1.6rem}
+.subject-facts div{display:flex;gap:.7rem;align-items:baseline;font-size:.9rem;color:rgba(239,243,237,.8);
+  border-bottom:1px dashed rgba(239,243,237,.16);padding-bottom:.5rem}
+.subject-facts b{color:var(--cream);font-weight:600;flex:none;min-width:4.6rem;font-family:var(--ff-m);
+  font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;padding-top:.25rem}
+
+/* ---------- 9e. booking state machine ---------- */
+.flow{display:grid;grid-template-columns:.94fr 1.06fr;gap:clamp(22px,3vw,40px);align-items:start;margin-top:clamp(30px,3.6vw,46px)}
+.flow-rail{display:grid;gap:.5rem}
+.fstep{display:grid;grid-template-columns:auto 1fr auto;gap:.75rem;align-items:center;width:100%;text-align:left;
+  padding:.85rem .95rem;border:1.5px solid var(--line);border-radius:var(--r);background:var(--card);
+  transition:border-color .18s,transform .18s,background .18s}
+.fstep:hover{transform:translateX(3px);border-color:var(--line-2)}
+.fstep .dot{width:.85rem;height:.85rem;border-radius:50%;border:2px solid var(--line-2);flex:none;transition:.2s}
+.fstep__name{font-weight:600;font-size:.95rem;display:block}
+.fstep__name .mono{display:block;color:var(--ink-3);font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;margin-top:.15rem}
+.fstep .go{font-family:var(--ff-m);font-size:.62rem;letter-spacing:.1em;color:var(--ink-3)}
+.fstep.is-done{border-color:var(--brand-2);background:var(--brand-lite)}
+.fstep.is-done .dot{background:var(--brand);border-color:var(--brand)}
+.fstep.is-now{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent-lite)}
+.fstep.is-now .dot{background:var(--accent);border-color:var(--accent)}
+.fstep.is-branch .fstep__name{color:var(--pen)}
+.branches{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-top:1rem}
+.flow-card{background:var(--card);border:1.5px solid var(--ink);border-radius:14px;overflow:hidden}
+.flow-head{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;justify-content:space-between;
+  padding:.95rem 1.15rem;border-bottom:1.5px solid var(--line);background:var(--paper-2)}
+.flow-head .tag{color:var(--ink-3)}
+.flow-body{padding:1.25rem 1.15rem}
+.flow-body .h3{margin-bottom:.5rem}
+.flow-body p{color:var(--ink-2);font-size:.95rem}
+.flow-body ul{margin-top:.9rem;display:grid;gap:.55rem}
+.flow-body li{display:grid;grid-template-columns:1.1rem 1fr;gap:.6rem;font-size:.92rem;color:var(--ink-2)}
+.flow-body li .ic{width:1.1rem;height:1.1rem;color:var(--brand);margin-top:.18rem}
+.api-line{margin-top:1.1rem;padding:.6rem .75rem;border:1px dashed var(--line-2);border-radius:6px;
+  font-family:var(--ff-m);font-size:.68rem;color:var(--ink-2);background:var(--paper);word-break:break-word}
+.api-line b{color:var(--brand)}
+.ledger{border-top:1.5px solid var(--line);background:var(--paper-2);padding:1rem 1.15rem 1.15rem}
+.ledger h4{font-family:var(--ff-m);font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);margin-bottom:.7rem}
+.lrow{display:flex;align-items:baseline;gap:.6rem;font-size:.88rem;padding:.3rem 0}
+.lrow span:first-child{color:var(--ink-2)}
+.lrow i{flex:1;border-bottom:1px dotted var(--line-2);transform:translateY(-4px)}
+.lrow b{font-family:var(--ff-m);font-size:.82rem;font-variant-numeric:tabular-nums}
+.lrow--in b{color:var(--brand)}
+.lrow--out b{color:var(--accent)}
+.lrow--hold b{color:#8A6208}
+.flow-escrow{margin-top:.9rem;padding-top:.8rem;border-top:1px dashed var(--line-2);display:flex;gap:.5rem;align-items:center;
+  font-family:var(--ff-m);font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
+.flow-escrow .ic{width:1rem;height:1rem;color:var(--brand)}
+/* ---------- 10. AI inspector (RAG) ---------- */
+.rag{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,2.6vw,36px);align-items:start;margin-top:clamp(30px,3.6vw,46px)}
+.panel{background:var(--card);border:1.5px solid var(--line);border-radius:var(--r);overflow:hidden}
+.panel__head{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;justify-content:space-between;
+  padding:.85rem 1rem;border-bottom:1.5px solid var(--line);background:var(--paper-2)}
+.panel__head .tag{color:var(--ink-3)}
+.panel__body{padding:1rem}
+.presets{display:grid;gap:.5rem}
+.preset{display:grid;grid-template-columns:auto 1fr;gap:.7rem;align-items:center;width:100%;text-align:left;
+  padding:.7rem .8rem;border:1.5px solid var(--line);border-radius:var(--r);background:var(--card);font-size:.92rem;
+  transition:border-color .18s,background .18s}
+.preset:hover{border-color:var(--line-2)}
+.preset.is-on{border-color:var(--brand);background:var(--brand-lite)}
+.preset .ic{width:1.1rem;height:1.1rem;color:var(--brand)}
+.preset b{display:block;font-weight:600}
+.preset .mono{color:var(--ink-3);font-size:.66rem}
+.pipe{display:grid;gap:.25rem;margin-top:1rem;font-family:var(--ff-m);font-size:.68rem;color:var(--ink-3)}
+.pipe div{display:flex;gap:.5rem;align-items:center}
+.pipe .ok{color:var(--brand)}
+.chunks{display:grid;gap:.6rem;margin-top:.9rem}
+.chunk{border:1.5px solid var(--line);border-radius:6px;padding:.7rem .8rem;background:var(--paper)}
+.chunk header{display:flex;justify-content:space-between;gap:.6rem;align-items:baseline;
+  font-family:var(--ff-m);font-size:.63rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin-bottom:.4rem}
+.chunk .score{flex:none;font-weight:700;color:var(--brand)}
+.chunk p{font-size:.88rem;color:var(--ink-2)}
+.chunk .bar{height:4px;margin-top:.55rem;border-radius:2px;background:var(--line);overflow:hidden}
+.chunk .bar i{display:block;height:100%;background:var(--brand-2);border-radius:2px;transition:width .7s cubic-bezier(.3,1.2,.4,1)}
+.code{margin:0;padding:1rem;background:var(--night);color:#D7E7DC;border-radius:0 0 var(--r) var(--r);
+  font-family:var(--ff-m);font-size:.72rem;line-height:1.65;overflow-x:auto;white-space:pre}
+.code .k{color:#83D3AE}
+.code .s{color:#FFE066}
+.code .n{color:#F0A07A}
+.code .c{color:#6E8C7C}
+.json-note{padding:.6rem 1rem;background:var(--night-2);color:rgba(239,243,237,.6);font-family:var(--ff-m);
+  font-size:.63rem;letter-spacing:.06em;border-top:1px solid rgba(239,243,237,.14)}
+.sim{display:inline-flex;gap:.4rem;align-items:center;padding:.28rem .6rem;border-radius:999px;
+  border:1.5px dashed var(--line-2);font-family:var(--ff-m);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+.sim .ic{width:.8rem;height:.8rem}
+/* ---------- 11. adaptive practice demo ---------- */
+.demo-grid{display:grid;grid-template-columns:296px 1fr;gap:clamp(20px,2.6vw,38px);align-items:start;margin-top:clamp(30px,3.6vw,46px)}
+.rail{position:sticky;top:100px;display:grid;gap:1rem}
+.rbox{background:var(--card);border:1.5px solid var(--line);border-radius:var(--r);padding:1rem}
+.rbox__label{display:block;font-family:var(--ff-m);font-weight:700;font-size:.62rem;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--accent);margin-bottom:.8rem}
+.stab{display:flex;justify-content:space-between;align-items:center;gap:.5rem;width:100%;text-align:left;
+  padding:.65rem .8rem;margin-bottom:.5rem;border:1.5px solid var(--line);border-radius:var(--r);background:var(--card);
+  font-size:.92rem;font-weight:600;transition:.15s}
+.stab:last-child{margin-bottom:0}
+.stab:hover{border-color:var(--line-2)}
+.stab .mono{color:var(--ink-3);font-size:.62rem}
+.stab.is-on{background:var(--ink);color:var(--cream);border-color:var(--ink)}
+.stab.is-on .mono{color:var(--marker)}
+.meter{display:grid;gap:.5rem}
+.meter__track{position:relative;height:8px;border-radius:99px;background:var(--line);overflow:hidden}
+.meter__fill{display:block;height:100%;width:60%;border-radius:99px;background:var(--brand-2);
+  transition:width .7s cubic-bezier(.3,1.2,.4,1),background .4s}
+.meter__nodes{display:flex;justify-content:space-between;font-family:var(--ff-m);font-size:.55rem;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--ink-3)}
+.meter__read{display:flex;align-items:baseline;gap:.6rem;margin-top:.2rem}
+.meter__num{font-family:var(--ff-d);font-size:1.9rem;line-height:1}
+.meter__lbl{font-family:var(--ff-m);font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2)}
+.rail-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;text-align:center}
+.rail-stats div{padding:.5rem .2rem;border:1.5px solid var(--line);border-radius:6px;background:var(--card)}
+.rail-stats b{display:block;font-family:var(--ff-d);font-size:1.25rem;line-height:1.1}
+.rail-stats span{font-family:var(--ff-m);font-size:.55rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+.quiz{position:relative;background:var(--card);border:1.5px solid var(--ink);border-radius:14px;padding:clamp(18px,2.2vw,28px);
+  box-shadow:0 24px 46px -40px rgba(10,25,19,.6)}
+.quiz__head{display:flex;flex-wrap:wrap;gap:.6rem;justify-content:space-between;align-items:center;
+  padding-bottom:.85rem;border-bottom:1.5px solid var(--line);font-family:var(--ff-m);font-size:.63rem;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+.quiz__head b{color:var(--ink)}
+.quiz__meta{display:flex;flex-wrap:wrap;gap:.4rem 1rem;justify-content:space-between;font-family:var(--ff-m);
+  font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin:1rem 0 .6rem}
+.quiz__q{font-family:var(--ff-d);font-size:clamp(1.3rem,2.1vw,1.7rem);line-height:1.28;margin-bottom:1.2rem;max-width:34ch}
+.opts{display:grid;gap:.6rem;max-width:36rem}
+.opt{display:grid;grid-template-columns:1.9rem 1fr;gap:.75rem;align-items:center;text-align:left;padding:.75rem .85rem;
+  border:1.5px solid var(--line);border-radius:var(--r);background:var(--card);font-size:.96rem;
+  transition:border-color .16s,transform .16s,background .2s,color .2s}
+.opt:not([disabled]):hover{border-color:var(--ink);transform:translateY(-2px)}
+.opt__key{width:1.9rem;height:1.9rem;display:grid;place-items:center;border:1.5px solid var(--line-2);border-radius:4px;
+  font-family:var(--ff-m);font-size:.75rem;font-weight:700;background:var(--paper)}
+.opt.is-ok{background:var(--brand);border-color:var(--brand);color:var(--cream)}
+.opt.is-ok .opt__key{background:rgba(255,255,255,.16);border-color:rgba(255,255,255,.4);color:var(--cream)}
+.opt.is-no{background:var(--accent-lite);border-color:var(--accent);color:var(--ink)}
+.opt.is-no .opt__key{background:#fff;border-color:var(--accent);color:var(--accent)}
+.opt.is-dim{opacity:.42}
+/* ---------- 11a. quiz feedback ---------- */
+.stamp{position:absolute;top:5.4rem;right:1.6rem;padding:.35rem .7rem;border:3px solid;border-radius:6px;
+  font-family:var(--ff-m);font-weight:700;font-size:.72rem;letter-spacing:.16em;transform:rotate(-7deg) scale(0);
+  opacity:0;pointer-events:none}
+.stamp.is-on{animation:stampIn .42s cubic-bezier(.2,1.6,.4,1) forwards}
+.stamp--ok{color:var(--brand);border-color:var(--brand);background:rgba(255,255,255,.9)}
+.stamp--no{color:var(--pen);border-color:var(--pen);background:rgba(255,255,255,.9)}
+@keyframes stampIn{0%{transform:rotate(5deg) scale(1.8);opacity:0}60%{transform:rotate(-7deg) scale(.94);opacity:1}100%{transform:rotate(-7deg) scale(1);opacity:1}}
+.why{display:none;max-width:38rem;margin-top:1.2rem;border:1.5px solid var(--brand-2);border-radius:var(--r);
+  background:var(--brand-lite);padding:1rem 1.05rem}
+.why.is-on{display:block;animation:pop .35s ease}
+.why__head{display:flex;align-items:center;gap:.4rem;font-family:var(--ff-m);font-weight:700;font-size:.63rem;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--brand);margin-bottom:.5rem}
+.why__head .ic{width:.9rem;height:.9rem}
+.why p{font-size:.94rem;color:var(--ink)}
+.cite{display:inline-flex;align-items:center;gap:.4rem;margin-top:.7rem;padding:.32rem .6rem;border-radius:4px;
+  border:1.5px solid var(--brand-2);background:var(--card);color:var(--brand);font-family:var(--ff-m);
+  font-size:.6rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.cite .ic{width:.8rem;height:.8rem}
+.adapt{margin-top:.6rem;font-family:var(--ff-h);font-size:1.2rem;color:var(--pen)}
+.quiz__foot{display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between;margin-top:1.1rem;min-height:44px}
+.keyhint{font-family:var(--ff-m);font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+.intro{margin-top:.6rem;display:grid;gap:1rem;max-width:38rem}
+.intro .row{display:grid;grid-template-columns:1.1rem 1fr;gap:.7rem;font-size:.93rem;color:var(--ink-2)}
+.intro .ic{width:1.1rem;height:1.1rem;color:var(--brand);margin-top:.2rem}
+/* ---------- 11b. diagnostic result ---------- */
+.result{display:grid;grid-template-columns:1fr 1.25fr;gap:clamp(20px,2.6vw,34px);margin-top:1.2rem}
+.result__meter{background:var(--paper-2);border:1.5px solid var(--line);border-radius:var(--r);padding:1.05rem}
+.result__verdict{font-size:.9rem;color:var(--ink-2);margin-top:.8rem}
+.recap{border-top:1.5px solid var(--line)}
+.rrow{display:grid;grid-template-columns:auto 1fr auto auto;gap:.7rem;align-items:center;padding:.6rem .1rem;
+  border-bottom:1px dashed var(--line);font-size:.92rem}
+.rrow .idx{font-family:var(--ff-m);font-size:.62rem;color:var(--ink-3)}
+.rrow .lvl{font-family:var(--ff-m);font-size:.62rem;color:var(--accent)}
+.rrow .ic{width:1.1rem;height:1.1rem}
+.rrow .ic.ok{color:var(--brand)}
+.rrow .ic.no{color:var(--pen)}
+.rrow .topic{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.weak{margin-top:1.1rem;padding:1rem;border:1.5px dashed var(--accent);border-radius:var(--r);background:var(--accent-lite)}
+.weak .tag{color:var(--pen);display:block;margin-bottom:.5rem}
+.weak ul{display:grid;gap:.4rem}
+.weak li{font-size:.92rem;color:var(--ink);display:flex;gap:.5rem;align-items:baseline}
+.weak li::before{content:'';width:.5rem;height:.5rem;border-radius:50%;background:var(--pen);flex:none}
+.result-cta{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:1.1rem}
+
+/* ---------- 12. tutors + payout slip ---------- */
+.tutor-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,4vw,64px);align-items:start}
+.feat{display:grid;gap:1.15rem;margin-top:1.8rem}
+.feat li{display:grid;grid-template-columns:2.6rem 1fr;gap:.9rem}
+.feat__ic{width:2.6rem;height:2.6rem;border-radius:var(--r);display:grid;place-items:center;
+  border:1.5px solid rgba(239,243,237,.18);background:rgba(255,255,255,.04);color:var(--marker)}
+.feat b{display:block;font-size:1rem;font-weight:600;margin-bottom:.2rem}
+.feat p{font-size:.92rem;color:rgba(239,243,237,.72)}
+.slip{position:relative;background:var(--card);border:1.5px solid var(--ink);border-radius:12px;
+  box-shadow:0 22px 44px -34px rgba(0,0,0,.6);overflow:hidden}
+.slip__head{display:flex;justify-content:space-between;gap:.6rem;padding:.95rem 1.15rem;border-bottom:1.5px solid var(--line);
+  background:var(--ink);color:var(--cream);font-family:var(--ff-m);font-size:.63rem;letter-spacing:.12em;text-transform:uppercase}
+.slip__head span:first-child{color:var(--marker)}
+.slip__body{padding:1.15rem}
+.rng{display:block;margin-bottom:1.15rem}
+.rng__row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.5rem;
+  font-family:var(--ff-m);font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2)}
+.rng__val{font-family:var(--ff-m);font-size:.82rem;font-weight:700;color:var(--ink)}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:3px;background:var(--line);cursor:pointer}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:var(--ink);
+  border:3px solid var(--card);box-shadow:0 1px 4px rgba(0,0,0,.3)}
+input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:var(--ink);border:3px solid var(--card)}
+.presets-row{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.1rem}
+.preset-btn{padding:.4rem .7rem;border:1.5px solid var(--line-2);border-radius:99px;background:var(--card);
+  font-family:var(--ff-m);font-size:.63rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2)}
+.preset-btn:hover{border-color:var(--ink);color:var(--ink)}
+.slip__rows{border-top:1.5px dashed var(--line);border-bottom:1.5px dashed var(--line);padding:.9rem 0;display:grid;gap:.5rem}
+.total{text-align:center;padding:1.1rem 0 .3rem}
+.total .tag{color:var(--brand);display:block;margin-bottom:.2rem}
+.total b{display:block;font-family:var(--ff-d);font-size:clamp(2rem,3.4vw,2.7rem);color:var(--brand);line-height:1.1;
+  font-variant-numeric:tabular-nums}
+.slip__foot{padding:.85rem 1.15rem 1.05rem;background:var(--paper-2);border-top:1.5px solid var(--line);
+  font-family:var(--ff-m);font-size:.6rem;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-2);line-height:1.9}
+/* ---------- 12b. pricing ---------- */
+.plans{display:grid;grid-template-columns:.95fr 1.05fr;gap:clamp(20px,2.6vw,34px);align-items:stretch;margin-top:clamp(30px,3.6vw,46px)}
+.plan{display:flex;flex-direction:column;background:var(--card);border:1.5px solid var(--line);border-radius:12px;padding:clamp(20px,2.4vw,30px)}
+.plan--plus{border-color:var(--brand-deep);background:var(--night);color:var(--cream);position:relative;overflow:hidden}
+.plan--plus .plan__tag{color:var(--marker)}
+.plan--plus .plan__price b{color:var(--marker)}
+.plan--plus li{color:rgba(239,243,237,.8)}
+.plan--plus .plan__note{color:rgba(239,243,237,.6)}
+.plan__tag{font-family:var(--ff-m);font-weight:700;font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:var(--brand)}
+.plan__price{display:flex;align-items:baseline;gap:.5rem;margin:.7rem 0 1.1rem}
+.plan__price b{font-family:var(--ff-d);font-size:clamp(2rem,3.2vw,2.6rem);line-height:1;font-variant-numeric:tabular-nums}
+.plan__price span{font-family:var(--ff-m);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+.plan--plus .plan__price span{color:rgba(239,243,237,.55)}
+.plan ul{display:grid;gap:.65rem;margin-bottom:1.4rem}
+.plan li{display:grid;grid-template-columns:1.1rem 1fr;gap:.6rem;font-size:.94rem;color:var(--ink-2)}
+.plan li .ic{width:1.1rem;height:1.1rem;color:var(--brand);margin-top:.18rem}
+.plan--plus li .ic{color:var(--marker)}
+.plan .btn{margin-top:auto}
+.plan__note{font-family:var(--ff-m);font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin-top:.8rem}
+.scratch{position:relative;height:88px;margin:.9rem 0 1.2rem;border:1.5px dashed rgba(255,224,102,.4);border-radius:8px;overflow:hidden}
+.scratch__under{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.25rem;
+  text-align:center;background:var(--marker);color:var(--ink)}
+.scratch__under b{font-family:var(--ff-d);font-size:1.3rem}
+.scratch canvas{position:absolute;inset:0;width:100%;height:100%;touch-action:none;cursor:crosshair;transition:opacity .6s}
+.scratch.is-done canvas{opacity:0;pointer-events:none}
+.badge-fav{position:absolute;top:1rem;right:1rem;padding:.3rem .6rem;border-radius:99px;background:var(--marker);color:var(--ink);
+  font-family:var(--ff-m);font-weight:700;font-size:.58rem;letter-spacing:.14em;text-transform:uppercase}
+
+/* ---------- 12c. metrics + scope ---------- */
+.metrics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(14px,1.8vw,22px);margin-top:clamp(28px,3.2vw,42px)}
+.metric{background:var(--card);border:1.5px solid var(--line);border-radius:var(--r);padding:1.2rem}
+.metric__top{display:flex;gap:.6rem;align-items:center;margin-bottom:.6rem}
+.metric__top .ic{width:1.2rem;height:1.2rem;color:var(--brand)}
+.metric b{font-size:1rem;font-weight:600;display:block}
+.metric p{font-size:.9rem;color:var(--ink-2);margin-top:.35rem}
+.metric .mono{display:block;margin-top:.7rem;color:var(--ink-3);font-size:.63rem;letter-spacing:.08em;text-transform:uppercase}
+.scope{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(12px,1.6vw,20px);margin-top:clamp(28px,3.2vw,42px)}
+.scope li{border:1.5px dashed var(--line-2);border-radius:var(--r);padding:1.05rem;background:var(--card)}
+.scope .tag{display:block;color:var(--pen);margin-bottom:.5rem}
+.scope b{display:block;font-weight:600;margin-bottom:.3rem}
+.scope p{font-size:.9rem;color:var(--ink-2)}
+.tracks{margin-top:clamp(30px,3.6vw,46px);display:grid;gap:.6rem}
+.trow{display:grid;grid-template-columns:3.2rem 1fr auto;gap:1rem;align-items:center;padding:.85rem 1rem;
+  border:1.5px solid var(--line);border-radius:var(--r);background:var(--card)}
+.trow__n{font-family:var(--ff-d);font-size:1.5rem;color:var(--line-2);line-height:1}
+.trow b{display:block;font-weight:600;font-size:.95rem}
+.trow p{font-size:.9rem;color:var(--ink-2)}
+.trow__kind{display:flex;flex-wrap:wrap;gap:.35rem;justify-content:flex-end}
+.kind{padding:.25rem .55rem;border-radius:99px;border:1.5px solid var(--line-2);
+  font-family:var(--ff-m);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2)}
+.kind--api{background:var(--brand-lite);border-color:var(--brand-2);color:var(--brand)}
+.kind--ai{background:var(--accent-lite);border-color:var(--accent);color:#A93F16}
+.kind--ui{background:var(--paper-2)}
+/* ---------- 13. FAQ ---------- */
+.faq{display:grid;gap:.65rem;max-width:56rem;margin-top:clamp(26px,3vw,40px)}
+.q{border:1.5px solid var(--line);border-radius:var(--r);background:var(--card);transition:border-color .2s}
+.q[open]{border-color:var(--ink)}
+.q summary{display:flex;justify-content:space-between;gap:1rem;align-items:center;padding:1rem 1.05rem;
+  font-weight:600;font-size:1rem;cursor:pointer;list-style:none}
+.q summary::-webkit-details-marker{display:none}
+.q summary:hover{color:var(--brand)}
+.q__fx{width:2rem;height:2rem;flex:none;display:grid;place-items:center;border:1.5px solid var(--line-2);
+  border-radius:6px;background:var(--paper);transition:.25s}
+.q__fx .ic{width:1rem;height:1rem;transition:transform .25s}
+.q[open] .q__fx{background:var(--ink);border-color:var(--ink);color:var(--cream)}
+.q[open] .q__fx .ic{transform:rotate(45deg)}
+.q__a{padding:0 1.05rem 1.05rem;border-top:1px dashed var(--line-2);margin-top:0}
+.q__a p{padding-top:.9rem;font-size:.95rem;color:var(--ink-2);max-width:70ch}
+.q__a .tag{color:var(--accent)}
+
+/* ---------- 14. join ---------- */
+.join{display:grid;justify-items:center;text-align:center}
+.join .h2{margin:.4rem 0 .8rem}
+.join .lede{margin-inline:auto}
+.join-card{width:min(620px,100%);margin-top:clamp(24px,3vw,36px);background:var(--card);border:1.5px solid var(--ink);
+  border-radius:14px;padding:clamp(18px,2.4vw,26px);text-align:left}
+.seg{display:grid;grid-template-columns:1fr 1fr;border:1.5px solid var(--line-2);border-radius:var(--r);overflow:hidden}
+.seg button{display:flex;align-items:center;justify-content:center;gap:.5rem;padding:.8rem .6rem;font-weight:600;
+  font-size:.93rem;background:var(--card);color:var(--ink-2);transition:.18s}
+.seg button + button{border-left:1.5px solid var(--line-2)}
+.seg button .ic{width:1.05rem;height:1.05rem}
+.seg button.is-on{background:var(--ink);color:var(--cream)}
+.fieldrow{display:grid;grid-template-columns:1.4fr 1fr;gap:.7rem;margin-top:1rem}
+.field{display:grid;gap:.35rem}
+.field label{font-family:var(--ff-m);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+.field input,.field select{border:1.5px solid var(--line-2);border-radius:var(--r);background:var(--paper);
+  padding:.75rem .8rem;font-size:.95rem;width:100%}
+.field input:focus,.field select:focus{border-color:var(--ink);background:var(--card)}
+.field input::placeholder{color:var(--ink-3)}
+.join-submit{display:grid;grid-template-columns:1fr;margin-top:1.1rem}
+.err{color:var(--pen);font-size:.78rem;font-family:var(--ff-m);margin-top:.6rem;min-height:1.1rem}
+.join-fine{margin-top:1rem;padding-top:.9rem;border-top:1px dashed var(--line-2);font-family:var(--ff-m);
+  font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);display:grid;gap:.3rem}
+.shake{animation:shake .4s ease}
+@keyframes shake{25%{transform:translateX(-6px)}50%{transform:translateX(5px)}75%{transform:translateX(-3px)}}
+.ok-card{display:grid;justify-items:start;gap:.6rem}
+.ok-card__ic{width:3.1rem;height:3.1rem;border-radius:50%;display:grid;place-items:center;background:var(--brand-lite);
+  color:var(--brand);border:1.5px solid var(--brand-2)}
+.ok-card__ic .ic{width:1.5rem;height:1.5rem}
+
+/* ---------- 15. footer ---------- */
+.foot{background:var(--night);color:var(--cream);padding:clamp(48px,5vw,76px) 0 0}
+.foot-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:clamp(24px,3vw,52px);padding-bottom:clamp(28px,3vw,44px)}
+.foot .brand{color:var(--cream)}
+.foot p{color:rgba(239,243,237,.72);font-size:.93rem;max-width:36ch}
+.foot .honest{margin-top:1.1rem;padding-top:1rem;border-top:1px dashed rgba(239,243,237,.18);
+  font-family:var(--ff-m);font-size:.62rem;letter-spacing:.06em;line-height:1.9;text-transform:uppercase;color:rgba(239,243,237,.5)}
+.foot-col .tag{color:var(--marker);display:block;margin-bottom:.9rem}
+.foot-col a{display:block;color:rgba(239,243,237,.82);text-decoration:none;padding:.3rem 0;font-size:.93rem}
+.foot-col a:hover{color:var(--marker)}
+.foot-bar{border-top:1px dashed rgba(239,243,237,.2);padding:1.2rem 0;display:flex;flex-wrap:wrap;gap:.6rem 1.4rem;
+  justify-content:space-between;font-family:var(--ff-m);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(239,243,237,.5)}
+
+/* ---------- 16. toasts ---------- */
+#toasts{position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%);z-index:999;display:grid;gap:.6rem;width:min(92vw,440px)}
+.toast{display:grid;grid-template-columns:1.1rem 1fr;gap:.7rem;align-items:center;background:var(--night);color:var(--cream);
+  border:1.5px solid var(--night-2);border-radius:var(--r);padding:.8rem 1rem;font-size:.9rem;font-weight:500;
+  box-shadow:0 18px 34px -22px rgba(0,0,0,.7);animation:toastIn .35s cubic-bezier(.2,1.3,.4,1)}
+.toast .ic{width:1.1rem;height:1.1rem;color:var(--marker)}
+.toast.is-out{opacity:0;transform:translateY(8px);transition:.35s}
+@keyframes toastIn{from{opacity:0;transform:translateY(14px)}}
+/* ---------- 17. responsive ---------- */
+@media (max-width:1100px){
+  .trow{grid-template-columns:3.2rem 1fr}
+  .trow__kind{grid-column:2;justify-content:flex-start}
+}
+@media (max-width:1040px){
+  .hero-grid{grid-template-columns:1fr;gap:2.6rem}
+  .hero-note{position:static;text-align:left;max-width:none;transform:none;display:flex;align-items:center;gap:.6rem}
+  .hero-note svg{display:none}
+  .steps{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .flow{grid-template-columns:1fr}
+  .rag{grid-template-columns:1fr}
+  .demo-grid{grid-template-columns:1fr}
+  .rail{position:static}
+  .subjects-grid{grid-template-columns:1fr;gap:2.6rem}
+  .tutor-grid{grid-template-columns:1fr;gap:2.6rem}
+  .plans{grid-template-columns:1fr}
+  .scope{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .result{grid-template-columns:1fr}
+  .foot-grid{grid-template-columns:1fr 1fr}
+}
+@media (max-width:900px){
+  .nav-links{display:none}
+  .burger{display:flex}
+  .nav-cta .btn{display:none}
+  .mcta{display:flex}
+  body{padding-bottom:4.6rem}
+  .split,.split--wide,.third-grid{grid-template-columns:1fr;gap:1.8rem}
+  .metrics{grid-template-columns:1fr}
+  .faq{max-width:none}
+}
+@media (max-width:680px){
+  .g2,.g3,.g4{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr}
+  .scope{grid-template-columns:1fr}
+  .fieldrow{grid-template-columns:1fr}
+  .foot-grid{grid-template-columns:1fr}
+  .stamp{top:auto;bottom:6.6rem;right:1rem}
+  .quiz__q{max-width:none}
+  .shelf{height:240px;gap:.6rem}
+  .book--math{width:60px;height:190px}
+  .book--eng{width:70px;height:216px}
+  .book--phy{width:52px;height:176px}
+  .book .bn{font-size:.86rem}
+  .thread-log{height:290px}
+  .branches{grid-template-columns:1fr}
+  .rail-stats{grid-template-columns:repeat(3,1fr)}
+}
+@media (max-width:560px){
+  .sec{padding:56px 0}
+  .cta-row{flex-direction:column;align-items:stretch}
+  .cta-row .btn{width:100%}
+}
+
+/* ---------- 18. motion + print ---------- */
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+  .tick-track{animation:none}
+  [data-reveal]{opacity:1;transform:none}
+  .circ>svg path{stroke-dashoffset:0}
+  .strike::before,.strike::after{transform:scaleX(1) rotate(-1.5deg)}
+}
+@media print{
+  .nav,.mnav,.mcta,#toasts,.ticker,.hero-cta,.join-card{display:none!important}
+  body{background:#fff;color:#000}
+  .sec{padding:18px 0;break-inside:avoid}
+  .sec--night,.sec--brand,.third,.plan--plus,.slip__head,.code{background:#fff!important;color:#000!important}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<svg class="sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="ic-arrow-r" viewBox="0 0 24 24"><path d="M4 12h15"/><path d="M13 6l6 6-6 6"/></symbol>
+  <symbol id="ic-arrow-d" viewBox="0 0 24 24"><path d="M12 4v15"/><path d="M6 13l6 6 6-6"/></symbol>
+  <symbol id="ic-arrow-up" viewBox="0 0 24 24"><path d="M12 20V5"/><path d="M6 11l6-6 6 6"/></symbol>
+  <symbol id="ic-check" viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></symbol>
+  <symbol id="ic-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+  <symbol id="ic-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="ic-lock" viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="9.5" rx="1.6"/><path d="M8.5 10.5V8a3.5 3.5 0 017 0v2.5"/></symbol>
+  <symbol id="ic-shield" viewBox="0 0 24 24"><path d="M12 3.2l7 2.6v6c0 4.2-2.9 7.5-7 9-4.1-1.5-7-4.8-7-9v-6z"/><path d="M9.2 12.2l2 2 3.6-3.8"/></symbol>
+  <symbol id="ic-spark" viewBox="0 0 24 24"><path d="M12 3.5l1.9 5.1 5.1 1.9-5.1 1.9L12 17.5l-1.9-5.1L5 10.5l5.1-1.9z"/><path d="M18.4 16.6l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"/></symbol>
+  <symbol id="ic-wallet" viewBox="0 0 24 24"><path d="M3.5 7.5h17v11h-17z"/><path d="M3.5 7.5L5.5 4h13l2 3.5"/><path d="M16.4 13h2.6"/></symbol>
+  <symbol id="ic-calendar" viewBox="0 0 24 24"><rect x="3.5" y="5.5" width="17" height="15" rx="2"/><path d="M8 3v5M16 3v5M3.5 10.5h17"/><path d="M7.5 14.2h3.2"/></symbol>
+  <symbol id="ic-verified" viewBox="0 0 24 24"><path d="M12 3.5a8.5 8.5 0 100 17 8.5 8.5 0 000-17z"/><path d="M8.4 12.3l2.4 2.4 4.8-5"/></symbol>
+  <symbol id="ic-cap" viewBox="0 0 24 24"><path d="M3 9.2l9-4.2 9 4.2-9 4.2z"/><path d="M7 11.4V16c0 1.7 2.2 3 5 3s5-1.3 5-3v-4.6"/></symbol>
+  <symbol id="ic-book" viewBox="0 0 24 24"><path d="M4 4.5h7.5v15H4z"/><path d="M12.5 4.5H20v15h-7.5z"/></symbol>
+  <symbol id="ic-clock" viewBox="0 0 24 24"><path d="M12 3.5a8.5 8.5 0 100 17 8.5 8.5 0 000-17z"/><path d="M12 7.8v4.8l3.2 2"/></symbol>
+  <symbol id="ic-target" viewBox="0 0 24 24"><path d="M12 3.5a8.5 8.5 0 100 17 8.5 8.5 0 000-17z"/><path d="M12 8.5a3.5 3.5 0 100 7 3.5 3.5 0 000-7z"/></symbol>
+  <symbol id="ic-refresh" viewBox="0 0 24 24"><path d="M20 12a8 8 0 11-2.4-5.7"/><path d="M20 4.2v4.6h-4.6"/></symbol>
+  <symbol id="ic-chat" viewBox="0 0 24 24"><path d="M4 5.5h16v11H9.5L4 20.5z"/></symbol>
+  <symbol id="ic-doc" viewBox="0 0 24 24"><path d="M6.5 3.5h7.5l4 4v13H6.5z"/><path d="M14 3.5v4h4"/><path d="M9.5 12.5h5M9.5 16h5"/></symbol>
+  <symbol id="ic-db" viewBox="0 0 24 24"><path d="M12 3.5c4.4 0 8 1.2 8 2.7s-3.6 2.7-8 2.7-8-1.2-8-2.7 3.6-2.7 8-2.7z"/><path d="M4 6.2v11.6c0 1.5 3.6 2.7 8 2.7s8-1.2 8-2.7V6.2"/><path d="M4 12c0 1.5 3.6 2.7 8 2.7s8-1.2 8-2.7"/></symbol>
+  <symbol id="ic-bolt" viewBox="0 0 24 24"><path d="M13.5 2.5L5 13.5h5.5L9.5 21.5 19 10.5h-6z"/></symbol>
+  <symbol id="ic-offline" viewBox="0 0 24 24"><path d="M4 8.6a15 15 0 0113.2-.6"/><path d="M7.6 12.2a10 10 0 018.6-.1"/><path d="M10.8 15.9a4.6 4.6 0 012.5 0"/><path d="M9.6 19.6h4.8"/><path d="M4.2 4l15.6 15.6"/></symbol>
+  <symbol id="ic-alert" viewBox="0 0 24 24"><path d="M12 4.2l8.5 15.3H3.5z"/><path d="M12 9.6v4.6M12 17.1h.01"/></symbol>
+  <symbol id="ic-route" viewBox="0 0 24 24"><circle cx="6" cy="6" r="2.5"/><path d="M6 8.5V19h8.5a3 3 0 003-3v-1.5"/><path d="M14.5 17l3-2.5 3 2.5"/></symbol>
+  <symbol id="ic-flag" viewBox="0 0 24 24"><path d="M6 21V3.5"/><path d="M6 4.6h12.6l-2.5 4.4 2.5 4.4H6z"/></symbol>
+  <symbol id="ic-gauge" viewBox="0 0 24 24"><path d="M4 18.5a8 8 0 1116 0"/><path d="M12 18.5l4.3-5.6"/><path d="M12 18.4h.01"/></symbol>
+  <symbol id="ic-users" viewBox="0 0 24 24"><path d="M9.5 11a3.5 3.5 0 100-7 3.5 3.5 0 000 7z"/><path d="M3 20c0-3 2.9-5.2 6.5-5.2S16 17 16 20"/><path d="M16.3 4.8a3.2 3.2 0 011.2 5.6"/><path d="M17.6 20c0-2.1-.6-3.7-1.8-4.7"/></symbol>
+  <symbol id="ic-key" viewBox="0 0 24 24"><path d="M8 17.5a3.6 3.6 0 100-7.2 3.6 3.6 0 000 7.2z"/><path d="M10.6 12.6L20 3.2M17 6.2l2.6 2.6M14.8 8.4l2.6 2.6"/></symbol>
+
+  <!-- hand-drawn figures: multi-colour, so fill/stroke are set per element rather than by .ic -->
+  <symbol id="il-script" viewBox="0 0 172 214">
+    <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M16 10h102l36 36v158H16z" fill="var(--card)" stroke="var(--ink)" stroke-width="1.6"/>
+      <path d="M118 10l36 36h-36z" fill="var(--paper-2)" stroke="var(--ink)" stroke-width="1.4"/>
+      <path d="M30 34h52M30 46h84" stroke="var(--ink-3)" stroke-width="1.8"/>
+      <path d="M30 62h106" stroke="var(--line-2)" stroke-width="1.3"/>
+      <path d="M30 78h15" stroke="var(--ink)" stroke-width="2.4"/>
+      <path d="M28 106h100" stroke="var(--marker)" stroke-width="10" opacity=".62"/>
+      <path d="M30 98h104M30 114h94M30 130h70" stroke="var(--ink-3)" stroke-width="1.7"/>
+      <path d="M42 90c22-8 66-6 84 6 16 10 12 28-8 33-22 6-64 4-80-8-11-9-7-25 4-31Z" stroke="var(--pen)" stroke-width="2.3"/>
+      <path d="M24 95l4 5 9-12" stroke="var(--brand)" stroke-width="2.4"/>
+      <path d="M30 152h15" stroke="var(--ink)" stroke-width="2.4"/>
+      <path d="M26 173c20-5 44-6 80-3" stroke="var(--pen)" stroke-width="2.5"/>
+      <path d="M24 167l8 8M32 167l-8 8" stroke="var(--pen)" stroke-width="2.2"/>
+      <circle cx="132" cy="180" r="17" fill="var(--card)" stroke="var(--pen)" stroke-width="1.9" stroke-dasharray="5 4"/>
+      <path d="M140 171c-4-4-14-2-14 7 0 9 10 12 14 6" stroke="var(--pen)" stroke-width="2.4"/>
+    </g>
+  </symbol>
+
+  <symbol id="il-weakspot" viewBox="0 0 176 138">
+    <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="12" y="10" width="152" height="118" rx="9" fill="var(--card)" stroke="var(--line)" stroke-width="1.5"/>
+      <path d="M12 38h152" stroke="var(--line)" stroke-width="1.4"/>
+      <circle cx="26" cy="24" r="2.6" fill="var(--line-2)" stroke="none"/>
+      <circle cx="36" cy="24" r="2.6" fill="var(--line-2)" stroke="none"/>
+      <circle cx="46" cy="24" r="2.6" fill="var(--line-2)" stroke="none"/>
+      <path d="M60 24h30" stroke="var(--ink-3)" stroke-width="1.8"/>
+      <rect x="24" y="52" width="12" height="12" rx="3" stroke="var(--line-2)" stroke-width="1.5"/>
+      <path d="M46 58h74" stroke="var(--ink-3)" stroke-width="1.8"/>
+      <path d="M42 82h62" stroke="var(--marker)" stroke-width="11" opacity=".62"/>
+      <rect x="24" y="76" width="12" height="12" rx="3" fill="var(--pen)" stroke="var(--pen)" stroke-width="1.5"/>
+      <path d="M27.4 82l2.6 2.6 4.6-5.6" stroke="var(--card)" stroke-width="1.7"/>
+      <path d="M46 82h58" stroke="var(--ink)" stroke-width="1.8"/>
+      <rect x="24" y="100" width="12" height="12" rx="3" stroke="var(--line-2)" stroke-width="1.5"/>
+      <path d="M46 106h82" stroke="var(--ink-3)" stroke-width="1.8"/>
+      <path d="M22 68c22-7 66-7 88 0 15 5 14 20-2 24-24 6-64 5-84-4-13-6-12-15-2-20Z" stroke="var(--pen)" stroke-width="2.3"/>
+      <path d="M118 86h4" stroke="var(--pen)" stroke-width="1.5" stroke-dasharray="3 4"/>
+      <circle cx="136" cy="86" r="14" fill="var(--accent)" stroke="none"/>
+      <path d="M130 86h10M136 81l5 5-5 5" stroke="#fff" stroke-width="2.2"/>
+    </g>
+  </symbol>
+
+  <symbol id="il-loop" viewBox="0 0 240 136">
+    <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M50 116C92 112 148 112 190 115" stroke="var(--marker)" stroke-width="9" opacity=".55"/>
+      <path d="M205 70v20c0 17-11 26-29 26H62c-16 0-26-9-26-22v-4" stroke="var(--line-2)" stroke-width="1.6" stroke-dasharray="5 5"/>
+      <path d="M28.5 92l7.5-8 7.5 8" stroke="var(--accent)" stroke-width="2.2"/>
+      <path d="M56 48h15M113 48h15M170 48h15" stroke="var(--ink-3)" stroke-width="1.7"/>
+      <path d="M67 43l6 5-6 5M124 43l6 5-6 5M181 43l6 5-6 5" stroke="var(--ink-3)" stroke-width="1.7"/>
+      <g transform="translate(34 48)">
+        <circle r="18" fill="var(--card)" stroke="var(--brand)" stroke-width="1.6"/>
+        <g stroke="var(--ink)" stroke-width="1.6">
+          <circle r="6.5"/><path d="M0 -4v4.4l3 1.8"/>
+        </g>
+      </g>
+      <g transform="translate(91 48)">
+        <circle r="18" fill="var(--card)" stroke="var(--brand)" stroke-width="1.6"/>
+        <g stroke="var(--ink)" stroke-width="1.6">
+          <circle cx="-4.5" cy="-1" r="3.4"/><path d="M-10 7c0-3.2 2.4-5 5.5-5s5.5 1.8 5.5 5"/>
+          <circle cx="6" cy="-2" r="2.6"/><path d="M5.5 3.6c2.8.2 4.5 2 4.5 3.4"/>
+        </g>
+      </g>
+      <g transform="translate(148 48)">
+        <circle r="18" fill="var(--card)" stroke="var(--brand)" stroke-width="1.6"/>
+        <path d="M-9 -6h18v11h-9l-5 5v-5h-4z" stroke="var(--ink)" stroke-width="1.6"/>
+      </g>
+      <g transform="translate(205 48)">
+        <circle r="18" fill="var(--card)" stroke="var(--accent)" stroke-width="1.6"/>
+        <g stroke="var(--ink)" stroke-width="1.6">
+          <circle r="7.2"/><circle r="3.2"/>
+          <path d="M0 -12.5v3.6M0 12.5v-3.6M-12.5 0h3.6M12.5 0h-3.6"/>
+        </g>
+      </g>
+    </g>
+  </symbol>
+
+  <symbol id="il-escrow" viewBox="0 0 176 150">
+    <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <g transform="rotate(-8 96 19)">
+        <rect x="70" y="6" width="52" height="26" rx="3" fill="var(--marker)" stroke="var(--ink)" stroke-width="1.4"/>
+        <path d="M90 26V11M90 26l11-15M101 11v15M86 18.5h19M86 22.5h19" stroke="var(--ink)" stroke-width="1.9"/>
+        <circle cx="112" cy="19" r="5.5" stroke="var(--ink)" stroke-width="1.4"/>
+      </g>
+      <path d="M96 34v9" stroke="var(--pen)" stroke-width="1.5" stroke-dasharray="3 4"/>
+      <path d="M91 42l5 5 5-5" stroke="var(--pen)" stroke-width="1.8"/>
+      <rect x="34" y="58" width="108" height="78" rx="9" fill="var(--card)" stroke="var(--ink)" stroke-width="1.7"/>
+      <rect x="72" y="48" width="32" height="11" rx="5.5" fill="var(--ink)" stroke="none"/>
+      <path d="M46 88h24M46 100h18M46 112h24" stroke="var(--line-2)" stroke-width="1.5"/>
+      <path d="M80 104v-6a8 8 0 0 1 16 0v6" stroke="var(--ink)" stroke-width="2.2"/>
+      <rect x="74" y="104" width="28" height="24" rx="4" fill="var(--brand)" stroke="none"/>
+      <path d="M82 116l5 5 8-10" stroke="var(--card)" stroke-width="2.2"/>
+      <circle cx="138" cy="126" r="19" fill="var(--brand)" stroke="none"/>
+      <path d="M130 126l6 6 11-13" stroke="var(--card)" stroke-width="2.6"/>
+    </g>
+  </symbol>
+</svg>
+<!-- ============================== NAV ============================== -->
+<header class="nav" id="nav">
+  <div class="wrap nav-in">
+    <a class="brand" href="#top"><span class="brand-mark" aria-hidden="true"></span>StudyCircle</a>
+    <nav class="nav-links" aria-label="Sections">
+      <a href="#how">How it works</a>
+      <a href="#booking">Booking</a>
+      <a href="#ai">AI engine</a>
+      <a href="#demo">Live demo</a>
+      <a href="#tutors">For tutors</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div class="nav-cta">
+      <a class="btn btn--sm" href="#join">Join the pilot<svg class="ic" aria-hidden="true"><use href="#ic-arrow-r"/></svg></a>
+      <button class="burger" id="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mnav">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <span class="prog" id="prog" aria-hidden="true"></span>
+</header>
+<nav class="mnav" id="mnav" aria-label="Mobile sections">
+  <a href="#why">Why StudyCircle</a>
+  <a href="#how">How it works</a>
+  <a href="#booking">How a booking works</a>
+  <a href="#ai">Inside the AI engine</a>
+  <a href="#demo">Live adaptive demo</a>
+  <a href="#tutors">For tutors</a>
+  <a href="#pricing">Pricing</a>
+  <a href="#metrics">What we measure</a>
+  <a href="#faq">Questions</a>
+  <a class="btn btn--block" href="#join">Join the pilot<svg class="ic" aria-hidden="true"><use href="#ic-arrow-r"/></svg></a>
+</nav>
+<main id="main">
+<!-- ============================== HERO ============================== -->
+<section class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="badge" data-reveal><span class="pulse" aria-hidden="true"></span>Pilot opening · Nigeria · JAMB, WAEC &amp; NECO</p>
+      <h1 class="h1" data-reveal style="--d:70ms">Your weak spots, <span class="circ">circled<svg viewBox="0 0 132 62" preserveAspectRatio="none" aria-hidden="true"><path d="M12 34C8 14 44 6 74 8c32 2 50 12 48 26-2 16-36 23-72 21-30-2-42-9-36-23 5-12 44-19 78-15" pathLength="1"/></svg></span> —<br>then <span class="strike">crossed out</span>.</h1>
+      <p class="hand" data-reveal style="--d:140ms">— the way a good teacher marks your script.</p>
+      <p class="hero-sub" data-reveal style="--d:200ms">Book a verified tutor from <b>₦1,000 a session</b> with your money held in escrow — then let an adaptive AI engine drill the exact topics you keep missing, explaining every one against the syllabus it cites.</p>
+      <div class="hero-cta cta-row" data-reveal style="--d:260ms">
+        <a class="btn btn--accent" href="#demo">Take the 60-second diagnostic<svg class="ic" aria-hidden="true"><use href="#ic-arrow-d"/></svg></a>
+        <a class="btn btn--ghost" href="#booking">See how a booking works</a>
+      </div>
+      <div class="proofs" data-reveal style="--d:320ms">
+        <p class="proof"><svg class="ic" aria-hidden="true"><use href="#ic-shield"/></svg><span><b>Escrow-held payments.</b> Released when the session is marked complete — not when you tap pay.</span></p>
+        <p class="proof"><svg class="ic" aria-hidden="true"><use href="#ic-doc"/></svg><span><b>Every explanation cites its syllabus source.</b> Retrieved, not improvised.</span></p>
+        <p class="proof"><svg class="ic" aria-hidden="true"><use href="#ic-offline"/></svg><span><b>Built for a weak connection.</b> Messages queue offline and send themselves when signal returns.</span></p>
+      </div>
+    </div>
+
+    <div class="hero-visual" data-reveal style="--d:180ms">
+      <p class="hand hero-note">the AI gets pulled into the same thread<svg viewBox="0 0 80 70" aria-hidden="true"><path d="M68 6C46 18 30 32 16 58"/><path d="M10 44l5 15 14-5"/></svg></p>
+      <article class="thread" id="threadCard">
+        <header class="thread-top">
+          <span class="ava" aria-hidden="true">CO</span>
+          <span class="thread-who">
+            <b>Chidinma Okafor</b>
+            <span class="mono">Mathematics · ₦1,200 / session · verified tutor</span>
+          </span>
+          <div class="thread-actions">
+            <span class="chip chip--ok"><svg class="ic" aria-hidden="true"><use href="#ic-lock"/></svg>Escrow held</span>
+            <span class="chip"><svg class="ic" aria-hidden="true"><use href="#ic-calendar"/></svg>Tue · 7:30pm</span>
+            <span class="chip chip--warn"><svg class="ic" aria-hidden="true"><use href="#ic-alert"/></svg>Scripted preview</span>
+            <button class="icon-btn" id="threadReplay" type="button" aria-label="Replay the preview thread"><svg class="ic" aria-hidden="true"><use href="#ic-refresh"/></svg></button>
+          </div>
+        </header>
+        <div class="thread-log" id="threadLog" role="log" aria-live="polite" aria-label="Illustrative session preview"></div>
+        <form class="thread-form" id="threadForm" autocomplete="off">
+          <label class="sr" for="threadInput">Type something to the preview assistant</label>
+          <input id="threadInput" type="text" maxlength="120" placeholder="Ask the preview assistant anything…">
+          <button class="send" type="submit" aria-label="Send message"><svg class="ic" aria-hidden="true"><use href="#ic-arrow-up"/></svg></button>
+        </form>
+      </article>
+      <p class="thread-foot">
+        <span>Illustrative preview — not a live AI</span>
+        <span>Escrow · released on completion</span>
+      </p>
+    </div>
+  </div>
+</section>
+<div class="ticker" aria-hidden="true">
+  <div class="tick-track">
+    <div class="tick-set"><span>On the syllabus this term</span><em>*</em><span class="k">Integration by substitution</span><em>*</em><span>Concord</span><em>*</em><span class="k">Projectile motion</span><em>*</em><span>Ohm's law</span><em>*</em><span class="k">A.P. &amp; G.P.</span><em>*</em><span>Antonyms</span><em>*</em><span class="k">Machines &amp; efficiency</span><em>*</em><span>Radioactive decay</span><em>*</em><span class="k">Factorisation</span><em>*</em><span>Correlatives</span><em>*</em><span class="k">Vectors &amp; scalars</span><em>*</em><span>Idioms</span><em>*</em><span class="k">Logarithms</span><em>*</em></div>
+    <div class="tick-set"><span>On the syllabus this term</span><em>*</em><span class="k">Integration by substitution</span><em>*</em><span>Concord</span><em>*</em><span class="k">Projectile motion</span><em>*</em><span>Ohm's law</span><em>*</em><span class="k">A.P. &amp; G.P.</span><em>*</em><span>Antonyms</span><em>*</em><span class="k">Machines &amp; efficiency</span><em>*</em><span>Radioactive decay</span><em>*</em><span class="k">Factorisation</span><em>*</em><span>Correlatives</span><em>*</em><span class="k">Vectors &amp; scalars</span><em>*</em><span>Idioms</span><em>*</em><span class="k">Logarithms</span><em>*</em></div>
+  </div>
+</div>
+
+<!-- ============================== WHY / PROBLEM ============================== -->
+<section class="sec" id="why">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="chapter"><span class="tag">Chapter 01 — the problem</span></p>
+      <h2 class="h2" data-reveal>Two bad options. We're building the third.</h2>
+      <p class="lede" data-reveal style="--d:80ms">Every exam year, Nigerian students get handed the same two choices. Both cost you, in different currencies: one costs understanding, the other costs money and time.</p>
+    </div>
+
+    <div class="g2 mt-l">
+      <article class="opt-card opt-card--bad" data-reveal>
+        <span class="tag">Option A</span>
+        <h3 class="h3">The past-question app</h3>
+        <ul class="xlist">
+          <li>Ten thousand questions, none of them chosen for you</li>
+          <li>Nobody to ask <em>why</em> you got it wrong</li>
+          <li>The same difficulty whether you're struggling or soaring</li>
+          <li>You practise what you already know, because it feels good</li>
+        </ul>
+      </article>
+      <article class="opt-card opt-card--bad" data-reveal style="--d:120ms">
+        <span class="tag">Option B</span>
+        <h3 class="h3">Finding a one-on-one tutor</h3>
+        <ul class="xlist">
+          <li>₦2,000–₦5,000 an hour, paid up front to a stranger</li>
+          <li>Discovery happens in WhatsApp statuses and DMs</li>
+          <li>Scheduling is a part-time job; rescheduling is a full-time one</li>
+          <li>Quality is a coin flip — there is no verification layer</li>
+        </ul>
+      </article>
+    </div>
+
+    <article class="third mt-l" data-reveal style="--d:160ms">
+      <span class="third__glow" aria-hidden="true"></span>
+      <div class="third-grid">
+        <div style="position:relative">
+          <span class="tag">The third option</span>
+          <h3 class="h3">Both — in one place, with the money held.</h3>
+          <p>Verified tutors you can book from ₦1,000 a session, with the fee escrowed until the session is marked complete. On top of that, an AI practice engine that remembers which topics you keep losing marks on and keeps serving them back — with the syllabus source for every explanation.</p>
+          <a class="arrow-link" href="#booking">Walk through a real booking, state by state<svg class="ic" aria-hidden="true"><use href="#ic-arrow-d"/></svg></a>
+        </div>
+        <div style="position:relative">
+          <div class="subject-facts">
+            <div><b>Tutors</b><span>Verified by hand for the pilot — credentials checked, short interview, then the profile goes live.</span></div>
+            <div><b>Money</b><span>Held in escrow from confirmation to completion. No-shows don't quietly pocket your fee.</span></div>
+            <div><b>AI</b><span>Retrieval over syllabus content. Explanations cite their source; generated questions are logged for review.</span></div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <div class="figs figs--2 mt-l">
+      <figure class="fig" data-reveal>
+        <svg class="il" viewBox="0 0 172 214" aria-hidden="true"><use href="#il-script"/></svg>
+        <figcaption>the engine reads the script, not the score</figcaption>
+      </figure>
+      <figure class="fig" data-reveal style="--ilw:320px">
+        <svg class="il" viewBox="0 0 176 138" aria-hidden="true"><use href="#il-weakspot"/></svg>
+        <figcaption>one circled topic, queued up and handed straight back</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+<!-- ============================== HOW IT WORKS ============================== -->
+<section class="sec sec--alt" id="how">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="chapter"><span class="tag">Chapter 02 — the loop</span></p>
+      <h2 class="h2" data-reveal>Diagnostic → tutor → drill. Then repeat.</h2>
+      <p class="lede" data-reveal style="--d:80ms">Four steps, and each one feeds the next: what you get wrong in the diagnostic changes what the AI serves you, and what the AI notices lands in your tutor's hands before the session starts.</p>
+    </div>
+
+    <div class="steps mt-l">
+      <article class="step" data-reveal>
+        <span class="step__n d" aria-hidden="true">01</span>
+        <span class="step__ic"><svg class="ic" aria-hidden="true"><use href="#ic-clock"/></svg></span>
+        <span class="tag">Diagnostic</span>
+        <h3 class="h4">Answer a handful of questions</h3>
+        <p>Each topic gets its own starting difficulty. From the first practice question onwards, nothing you're served is random.</p>
+      </article>
+      <article class="step" data-reveal style="--d:90ms">
+        <span class="step__n d" aria-hidden="true">02</span>
+        <span class="step__ic"><svg class="ic" aria-hidden="true"><use href="#ic-verified"/></svg></span>
+        <span class="tag">Match</span>
+        <h3 class="h4">Book a verified tutor</h3>
+        <p>Browse by subject, price, rating and availability. Credentials are checked — and the tutor does a short interview — before a profile is ever bookable.</p>
+      </article>
+      <article class="step" data-reveal style="--d:180ms">
+        <span class="step__n d" aria-hidden="true">03</span>
+        <span class="step__ic"><svg class="ic" aria-hidden="true"><use href="#ic-chat"/></svg></span>
+        <span class="tag">Session</span>
+        <h3 class="h4">Learn in one thread</h3>
+        <p>Chat with your tutor in-app and pull the AI assistant into the same thread when a pattern needs unpacking. Your fee stays in escrow the whole time.</p>
+      </article>
+      <article class="step" data-reveal style="--d:270ms">
+        <span class="step__n d" aria-hidden="true">04</span>
+        <span class="step__ic"><svg class="ic" aria-hidden="true"><use href="#ic-target"/></svg></span>
+        <span class="tag">The drill</span>
+        <h3 class="h4">Keep drilling weak spots</h3>
+        <p>Between sessions, the engine keeps returning to the topics you keep missing — with explanations pulled from syllabus content, and sources shown.</p>
+      </article>
+    </div>
+
+    <figure class="fig fig--wide mt-l" data-reveal>
+      <svg class="il" viewBox="0 0 240 136" aria-hidden="true"><use href="#il-loop"/></svg>
+      <figcaption>each pass writes the next one</figcaption>
+    </figure>
+
+    <aside class="step-note" data-reveal style="--d:200ms">
+      <p class="small"><b>What's deliberately not here in v1:</b> no video calls, no group sessions. Chat, explanation and adaptive practice — done properly — before we add anything that needs a reliable 2&nbsp;Mbps.</p>
+    </aside>
+  </div>
+</section>
+
+<!-- ============================== PILOT SUBJECTS ============================== -->
+<section class="sec sec--night" id="subjects">
+  <div class="wrap subjects-grid">
+    <div>
+      <p class="chapter"><span class="tag">Chapter 03 — the pilot</span></p>
+      <h2 class="h2" data-reveal>Three subjects, done end to end.</h2>
+      <p class="lede" data-reveal style="--d:80ms">We'd rather take three subjects through every part of the product — diagnostic, tutor matching, chat, adaptive practice — than ship twenty that half work. New subjects join when the one before it is genuinely finished.</p>
+      <div class="subject-facts mt-m">
+        <div><b>Maths</b><span>Algebra · sequences &amp; series · indices &amp; logs · calculus</span></div>
+        <div><b>English</b><span>Lexis &amp; structure · concord · idiomatic usage · antonyms &amp; synonyms</span></div>
+        <div><b>Physics</b><span>Measurement · motion · vectors · current electricity · machines · radioactivity</span></div>
+        <div><b>Demo bank</b><span>9 questions per subject, written by hand for this page — so the demo below can't repeat itself.</span></div>
+      </div>
+    </div>
+    <div data-reveal style="--d:140ms">
+      <div class="shelf" role="group" aria-label="Load a subject into the adaptive demo">
+        <button class="book book--math" type="button" data-sub="math" aria-label="Load Mathematics practice in the demo">
+          <span class="bv mono">Vol. 01</span><span class="bn">Mathematics</span><span class="bd" aria-hidden="true"></span>
+        </button>
+        <button class="book book--eng" type="button" data-sub="english" aria-label="Load Use of English practice in the demo">
+          <span class="bv mono">Vol. 02</span><span class="bn">Use of English</span><span class="bd" aria-hidden="true"></span>
+        </button>
+        <button class="book book--phy" type="button" data-sub="physics" aria-label="Load Physics practice in the demo">
+          <span class="bv mono">Vol. 03</span><span class="bn">Physics</span><span class="bd" aria-hidden="true"></span>
+        </button>
+      </div>
+      <p class="shelf-hint">Tap a spine — it loads that subject in the demo below</p>
+    </div>
+  </div>
+</section>
+<!-- ============================== BOOKING STATE MACHINE ============================== -->
+<section class="sec" id="booking">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="chapter"><span class="tag">Chapter 04 — the money</span></p>
+      <h2 class="h2" data-reveal>Every booking is a state machine — and the money follows it.</h2>
+      <p class="lede" data-reveal style="--d:80ms">A booking only ever exists in one of six states. Payment isn't a button, it's a side effect of the transition: held on <span class="mono">confirmed</span>, released on <span class="mono">completed</span>, refunded when it should be. Click through the states below — this is the same order the walkthrough follows.</p>
+    </div>
+
+    <div class="flow">
+      <div>
+        <div class="flow-rail" id="flowRail" role="tablist" aria-label="Booking states"></div>
+        <div class="branches">
+          <button class="btn btn--ghost btn--sm" type="button" data-branch="cancelled">
+            <svg class="ic" aria-hidden="true"><use href="#ic-x"/></svg>Student cancels
+          </button>
+          <button class="btn btn--ghost btn--sm" type="button" data-branch="no_show">
+            <svg class="ic" aria-hidden="true"><use href="#ic-alert"/></svg>Tutor no-shows
+          </button>
+          <button class="btn btn--ghost btn--sm" type="button" data-branch="student_no_show">
+            <svg class="ic" aria-hidden="true"><use href="#ic-clock"/></svg>Student no-shows
+          </button>
+        </div>
+        <div class="api-line" id="flowApi"></div>
+      </div>
+
+      <div class="flow-card">
+        <div class="flow-head">
+          <span class="tag">Booking #SC-1042</span>
+          <span class="mono" id="flowWho">student: Tomiwa · tutor: Chidinma Okafor · ⌀₦1,200</span>
+        </div>
+        <div class="flow-body">
+          <h3 class="h3" id="flowTitle">Requested</h3>
+          <p id="flowBody"></p>
+          <ul id="flowList"></ul>
+        </div>
+        <div class="ledger">
+          <h4>Escrow ledger</h4>
+          <div id="flowLedger"></div>
+          <p class="flow-escrow"><svg class="ic" aria-hidden="true"><use href="#ic-key"/></svg>Release is driven by a payment webhook, keyed for idempotency — a retried webhook can never pay a tutor twice.</p>
+        </div>
+      </div>
+    </div>
+
+    <aside class="fig-note mt-l" data-reveal>
+      <svg class="il" viewBox="0 0 176 150" aria-hidden="true"><use href="#il-escrow"/></svg>
+      <p class="small"><b>Where the money sits.</b> The fee is taken at confirmation and held — it moves only when the session is marked complete, and a retried release webhook can never pay a tutor twice. Change the state above and watch the ledger follow it.</p>
+    </aside>
+  </div>
+</section>
+
+<!-- ============================== AI ENGINE / RAG ============================== -->
+<section class="sec sec--alt" id="ai">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="chapter"><span class="tag">Chapter 05 — the engine</span></p>
+      <h2 class="h2" data-reveal>It explains with the syllabus open, not from memory.</h2>
+      <p class="lede" data-reveal style="--d:80ms">Ask for practice on a topic and the pipeline retrieves the relevant syllabus passages first, then asks the model to generate a question and explanation grounded in them — returned as validated structured output, and logged so it can be reviewed against a curated exam-question set.</p>
+    </div>
+
+    <div class="rag">
+      <div class="panel" data-reveal>
+        <div class="panel__head">
+          <span class="tag">Step 1 — ask</span>
+          <span class="sim"><svg class="ic" aria-hidden="true"><use href="#ic-alert"/></svg>Simulated retrieval · illustrative</span>
+        </div>
+        <div class="panel__body">
+          <div class="presets" id="ragPresets"></div>
+          <div class="pipe mt-m">
+            <div><svg class="ic ok" style="width:.9rem;height:.9rem" aria-hidden="true"><use href="#ic-check"/></svg><span>1 · query embedded</span></div>
+            <div><svg class="ic ok" style="width:.9rem;height:.9rem" aria-hidden="true"><use href="#ic-check"/></svg><span>2 · nearest syllabus chunks retrieved from the vector store</span></div>
+            <div><svg class="ic ok" style="width:.9rem;height:.9rem" aria-hidden="true"><use href="#ic-check"/></svg><span>3 · model called with retrieved context attached</span></div>
+            <div><svg class="ic ok" style="width:.9rem;height:.9rem" aria-hidden="true"><use href="#ic-check"/></svg><span>4 · output validated, then logged with its prompt and context</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel" data-reveal style="--d:120ms">
+        <div class="panel__head">
+          <span class="tag">Step 2 — retrieved context</span>
+          <span class="mono" id="ragMeta">—</span>
+        </div>
+        <div class="panel__body">
+          <div class="chunks" id="ragChunks"></div>
+        </div>
+        <div class="json-note" id="ragQuery">query: —</div>
+        <pre class="code" id="ragJson" aria-live="polite"></pre>
+      </div>
+    </div>
+
+    <div class="g3 mt-l">
+      <article class="opt-card" data-reveal>
+        <span class="tag">Adaptive, not random</span>
+        <h3 class="h4">A difficulty per student, per topic</h3>
+        <p class="small">Each topic you touch carries its own difficulty. Get it right and it tightens; get it wrong and the engine steps back until it sticks. A deliberate simple heuristic to start, not pretrained psychometrics.</p>
+      </article>
+      <article class="opt-card" data-reveal style="--d:100ms">
+        <span class="tag">Structured output</span>
+        <h3 class="h4">Question, options, answer, explanation</h3>
+        <p class="small">The model can't hand back free-form prose. It returns a validated object, so a malformed generation never reaches you as a half-question.</p>
+      </article>
+      <article class="opt-card" data-reveal style="--d:200ms">
+        <span class="tag">Auditable</span>
+        <h3 class="h4">Every generation is logged</h3>
+        <p class="small">Prompt, retrieved context and output are stored together — which is how explanation quality can be scored against a set of real JAMB/WAEC questions instead of vibes.</p>
+      </article>
+    </div>
+  </div>
+</section>
+<!-- ============================== ADAPTIVE DEMO ============================== -->
+<section class="sec" id="demo">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="chapter"><span class="tag">Chapter 06 — try it, no signup</span></p>
+      <h2 class="h2" data-reveal>Feel the engine move with you.</h2>
+      <p class="lede" data-reveal style="--d:80ms">Five questions. Get one right and it pushes you up a level; miss one and it comes back down to meet you. Every tradeable answer comes with the explanation, the trap it was testing, and the syllabus topic it came from.</p>
+    </div>
+
+    <div class="demo-grid">
+      <aside class="rail" data-reveal>
+        <div class="rbox">
+          <span class="rbox__label">Subject</span>
+          <div id="subjTabs">
+            <button class="stab is-on" type="button" data-sub="math">Mathematics<span class="mono">9 in bank</span></button>
+            <button class="stab" type="button" data-sub="english">Use of English<span class="mono">9 in bank</span></button>
+            <button class="stab" type="button" data-sub="physics">Physics<span class="mono">9 in bank</span></button>
+          </div>
+        </div>
+        <div class="rbox">
+          <span class="rbox__label">Adaptive level</span>
+          <div class="meter">
+            <div class="meter__track"><span class="meter__fill" id="meterFill"></span></div>
+            <div class="meter__nodes" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div>
+            <p class="meter__read"><span class="meter__num" id="meterNum">3</span><span class="meter__lbl" id="meterLbl">Standard</span></p>
+          </div>
+        </div>
+        <div class="rail-stats">
+          <div><b id="statQ">1</b><span>Question</span></div>
+          <div><b id="statOk">0</b><span>Correct</span></div>
+          <div><b id="statNo">0</b><span>Missed</span></div>
+        </div>
+        <button class="btn btn--ghost btn--block btn--sm" type="button" id="qReset">
+          <svg class="ic" aria-hidden="true"><use href="#ic-refresh"/></svg>Start over
+        </button>
+      </aside>
+
+      <div data-reveal style="--d:120ms">
+        <div class="quiz" id="qCard">
+          <div class="quiz__head">
+            <span><b>Adaptive practice</b> · demo engine</span>
+            <span id="qProg">Ready</span>
+          </div>
+          <div class="intro" id="qIntro">
+            <p class="row"><svg class="ic" aria-hidden="true"><use href="#ic-gauge"/></svg><span>You'll start at <b>level 3 — standard</b>. Three right answers in a row and you'll be on JAMB-final questions.</span></p>
+            <p class="row"><svg class="ic" aria-hidden="true"><use href="#ic-alert"/></svg><span>Keyboard: press <b>1–4</b> to answer, <b>Enter</b> for the next question. Everything here runs in your browser — nothing is sent anywhere.</span></p>
+            <p class="row"><svg class="ic" aria-hidden="true"><use href="#ic-doc"/></svg><span>Questions are pre-written for this page; the selection, the difficulty steps and the recap are the real logic.</span></p>
+          </div>
+          <div id="qRun" hidden>
+            <div class="quiz__meta"><span id="qTopic"></span><span id="qDiff"></span></div>
+            <h3 class="quiz__q" id="qText"></h3>
+            <div class="opts" id="qOpts"></div>
+            <div class="why" id="qWhy">
+              <p class="why__head"><svg class="ic" aria-hidden="true"><use href="#ic-spark"/></svg>SC·AI — why that's the answer</p>
+              <p id="qWhyText"></p>
+              <p><span class="cite" id="qCite"></span></p>
+              <p class="adapt" id="qAdapt"></p>
+            </div>
+          </div>
+          <p class="stamp" id="qStamp" aria-hidden="true"></p>
+          <div class="quiz__foot">
+            <span class="keyhint" id="keyHint">Answers are checked by the engine, not by a teacher</span>
+            <button class="btn btn--accent" type="button" id="qStart">Start the diagnostic<svg class="ic" aria-hidden="true"><use href="#ic-arrow-r"/></svg></button>
+            <button class="btn" type="button" id="qNext" hidden>Next question<svg class="ic" aria-hidden="true"><use href="#ic-arrow-r"/></svg></button>
+          </div>
+        </div>
+
+        <div class="quiz" id="qResult" hidden>
+          <div class="quiz__head">
+            <span><b>Your diagnostic</b> · <span id="qResSubject">Mathematics</span></span>
+            <span>5 questions</span>
+          </div>
+          <div class="result">
+            <div class="result__meter">
+              <div class="meter">
+                <div class="meter__track"><span class="meter__fill" id="rMeterFill"></span></div>
+                <div class="meter__nodes" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div>
+                <p class="meter__read"><span class="meter__num" id="rMeterNum">3</span><span class="meter__lbl" id="rMeterLbl">Standard</span></p>
+              </div>
+              <p class="result__verdict" id="qVerdict"></p>
+            </div>
+            <div>
+              <span class="tag" style="color:var(--pen)">Your run</span>
+              <div class="recap" id="qRecap"></div>
+              <div class="weak" id="qWeak">
+                <span class="tag">Drill these next</span>
+                <ul id="qWeakList"></ul>
+              </div>
+              <div class="result-cta cta-row">
+                <button class="btn" type="button" id="qSave">Keep this profile — join the pilot<svg class="ic" aria-hidden="true"><use href="#ic-arrow-r"/></svg></button>
+                <button class="btn btn--ghost" type="button" id="qAgain"><svg class="ic" aria-hidden="true"><use href="#ic-refresh"/></svg>Run another subject</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ============================== FOR TUTORS ============================== -->
+<section class="sec sec--night" id="tutors">
+  <div class="wrap tutor-grid">
+    <div>
+      <p class="chapter"><span class="tag">Chapter 07 — the other half</span></p>
+      <h2 class="h2" data-reveal>You shouldn't have to chase students to earn from what you know.</h2>
+      <p class="lede" data-reveal style="--d:80ms">StudyCircle exists for the tutor side too. Verified profile, your own rates, your own hours, and a fee that's already been collected before you teach a single minute.</p>
+      <ul class="feat" data-reveal style="--d:140ms">
+        <li>
+          <span class="feat__ic"><svg class="ic" aria-hidden="true"><use href="#ic-verified"/></svg></span>
+          <div><b>A verified profile</b><p>Credentials checked and a short interview before your profile goes live. Students are booking a badge, not a guess.</p></div>
+        </li>
+        <li>
+          <span class="feat__ic"><svg class="ic" aria-hidden="true"><use href="#ic-calendar"/></svg></span>
+          <div><b>Your hours, your price</b><p>Set a rate per subject and open only the slots you actually want to teach. Reschedule without losing the booking.</p></div>
+        </li>
+        <li>
+          <span class="feat__ic"><svg class="ic" aria-hidden="true"><use href="#ic-shield"/></svg></span>
+          <div><b>Protected from no-shows</b><p>The student's fee is already in escrow. If they vanish, you're still covered — your time is never the free option.</p></div>
+        </li>
+        <li>
+          <span class="feat__ic"><svg class="ic" aria-hidden="true"><use href="#ic-wallet"/></svg></span>
+          <div><b>Paid within 24 hours</b><p>Commission is charged on completed sessions only. Cancellations and no-shows cost you nothing.</p></div>
+        </li>
+      </ul>
+      <p class="mt-m" data-reveal style="--d:200ms">
+        <button class="btn btn--marker" type="button" id="tutorCta">Apply as a tutor — join the pilot<svg class="ic" aria-hidden="true"><use href="#ic-arrow-r"/></svg></button>
+      </p>
+    </div>
+
+    <div data-reveal style="--d:160ms">
+      <div class="slip">
+        <div class="slip__head"><span>StudyCircle</span><span>Tutor payout — estimate</span></div>
+        <div class="slip__body">
+          <div class="presets-row">
+            <button class="preset-btn" type="button" data-preset="starter">Starter · 3/wk</button>
+            <button class="preset-btn" type="button" data-preset="steady">Steady · 6/wk</button>
+            <button class="preset-btn" type="button" data-preset="full">Full · 12/wk</button>
+          </div>
+          <label class="rng">
+            <span class="rng__row"><span>Sessions per week</span><span class="rng__val" id="vSessions">6</span></span>
+            <input type="range" id="pSessions" min="1" max="30" step="1" value="6">
+          </label>
+          <label class="rng">
+            <span class="rng__row"><span>Your rate per session</span><span class="rng__val" id="vRate">₦1,200</span></span>
+            <input type="range" id="pRate" min="1000" max="5000" step="100" value="1200">
+          </label>
+          <div class="slip__rows">
+            <p class="lrow"><span>Student pays per session</span><i></i><b id="vStudent">₦1,200</b></p>
+            <p class="lrow lrow--in"><span>Gross per month <span class="mono" id="vWeeks">(4.33 weeks)</span></span><i></i><b id="vGross">₦31,176</b></p>
+            <p class="lrow lrow--out"><span>Platform commission · 12%</span><i></i><b id="vFee">−₦3,741</b></p>
+            <p class="lrow lrow--hold"><span>Charged on completed sessions only</span><i></i><b id="vZero">₦0 lost</b></p>
+          </div>
+          <div class="total">
+            <span class="tag">You receive per month</span>
+            <b id="vNet">₦27,435</b>
+          </div>
+        </div>
+        <div class="slip__foot">
+          Estimate, not an offer · 4.33 weeks per month<br>
+          Commission on completed sessions only · cancelled &amp; no-show sessions: ₦0<br>
+          Escrow held from confirmation · payout inside 24h of completion
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ============================== PRICING ============================== -->
+<section class="sec" id="pricing">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="chapter"><span class="tag">Chapter 08 — what it costs</span></p>
+      <h2 class="h2" data-reveal>Priced like a recharge card, not school fees.</h2>
+      <p class="lede" data-reveal style="--d:80ms">Tutors set their own session rate — ₦1,000 is the floor we allow, and commission only lands on sessions that actually happen. The practice engine has two tiers, and one of them is free permanently.</p>
+    </div>
+
+    <div class="plans">
+      <article class="plan" data-reveal>
+        <span class="plan__tag">Free · always</span>
+        <p class="plan__price"><b>₦0</b><span>/ forever</span></p>
+        <ul>
+          <li><svg class="ic" aria-hidden="true"><use href="#ic-check"/></svg>Adaptive practice, with a daily question cap</li>
+          <li><svg class="ic" aria-hidden="true"><use href="#ic-check"/></svg>Full explanations, syllabus source shown every time</li>
+          <li><svg class="ic" aria-hidden="true"><use href="#ic-check"/></svg>The diagnostic and your topic-by-topic difficulty profile</li>
+          <li><svg class="ic" aria-hidden="true"><use href="#ic-check"/></svg>Browse, book and chat with verified tutors</li>
+        </ul>
+        <button class="btn btn--ghost btn--block" type="button" id="freeCta">Start free — join the pilot<svg class="ic" aria-hidden="true"><use href="#ic-arrow-r"/></svg></button>
+        <p class="plan__note">The cap exists because model calls cost money — it's what keeps this tier alive.</p>
+      </article>
+
+      <article class="plan plan--plus" data-reveal style="--d:120ms">
+        <span class="badge-fav">Pilot favourite</span>
+        <span class="plan__tag">Circle+</span>
+        <p class="plan__price"><b>₦1,500</b><span>/ month</span></p>
+        <ul>
+          <li><svg class="ic" aria-hidden="true"><use href="#ic-check"/></svg>Unlimited adaptive practice — cap removed</li>
+          <li><svg class="ic" aria-hidden="true"><use href="#ic-check"/></svg>Weekly weak-spot report card, topic by topic</li>
+          <li><svg class="ic" aria-hidden="true"><use href="#ic-check"/></svg>Priority booking windows with top-rated tutors</li>
+          <li><svg class="ic" aria-hidden="true"><use href="#ic-check"/></svg>Everything in Free, still underneath</li>
+        </ul>
+        <div class="scratch" id="scratchWrap">
+          <div class="scratch__under"><b>Unlimited practice</b><span class="mono">no daily cap · full-speed drill</span></div>
+          <canvas id="scratchCanvas"></canvas>
+        </div>
+        <button class="btn btn--marker btn--block" type="button" id="plusCta">Go Circle+ — join the pilot<svg class="ic" aria-hidden="true"><use href="#ic-arrow-r"/></svg></button>
+        <p class="plan__note">Scratch the panel. The free tier hides nothing else from you.</p>
+      </article>
+    </div>
+  </div>
+</section>
+<!-- ============================== METRICS + SCOPE ============================== -->
+<section class="sec sec--alt" id="metrics">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="chapter"><span class="tag">Chapter 09 — how we'll know</span></p>
+      <h2 class="h2" data-reveal>Four numbers decide whether this worked.</h2>
+      <p class="lede" data-reveal style="--d:80ms">There isn't a single invented statistic on this page — so here is what we'll actually be watching when the pilot runs, and where each number comes from.</p>
+    </div>
+
+    <div class="metrics">
+      <article class="metric" data-reveal>
+        <div class="metric__top"><svg class="ic" aria-hidden="true"><use href="#ic-route"/></svg><b>Booking completion rate</b></div>
+        <p>Of every booking that gets requested, how many reach <span class="mono">completed</span> instead of being abandoned, cancelled or no-showed?</p>
+        <span class="mono">Counted from state transitions — the ledger, not a log line</span>
+      </article>
+      <article class="metric" data-reveal style="--d:80ms">
+        <div class="metric__top"><svg class="ic" aria-hidden="true"><use href="#ic-users"/></svg><b>Tutor retention after 3 sessions</b></div>
+        <p>Do tutors keep teaching past their third session? That's the honest test of whether a marketplace's supply side is actually viable.</p>
+        <span class="mono">Tracked per tutor cohort, never in aggregate</span>
+      </article>
+      <article class="metric" data-reveal style="--d:160ms">
+        <div class="metric__top"><svg class="ic" aria-hidden="true"><use href="#ic-target"/></svg><b>Questions answered per student per week</b></div>
+        <p>Engagement with the practice engine, with no tutor involved. If this stays flat, the AI layer isn't earning the model costs it burns.</p>
+        <span class="mono">Logged server-side per active student</span>
+      </article>
+      <article class="metric" data-reveal style="--d:240ms">
+        <div class="metric__top"><svg class="ic" aria-hidden="true"><use href="#ic-book"/></svg><b>Explanation quality score</b></div>
+        <p>Manually scored against a curated set of real JAMB/WAEC questions — because a plausible explanation and a correct one are different things.</p>
+        <span class="mono">A person reviews it against the stored generation log</span>
+      </article>
+    </div>
+
+    <div class="sec-head mt-l">
+      <h3 class="h2" data-reveal>Six things we are deliberately <span class="hl">not</span> building yet.</h3>
+      <p class="lede" data-reveal style="--d:80ms">Scope is a feature. Every one of these is a good idea that would make the pilot worse by existing too early.</p>
+    </div>
+    <ul class="scope">
+      <li data-reveal><span class="tag">Deferred</span><b>Live video tutoring</b><p>Chat, explanation and practice first. Video adds bandwidth, devices and scheduling complexity we haven't earned.</p></li>
+      <li data-reveal style="--d:60ms"><span class="tag">Deferred</span><b>Group sessions</b><p>One-to-one quality is already hard. It becomes many-sided the moment four students share a room.</p></li>
+      <li data-reveal style="--d:120ms"><span class="tag">Deferred</span><b>Every subject at once</b><p>Three subjects end to end beats twenty that half work. The next one ships when the last one is finished.</p></li>
+      <li data-reveal style="--d:180ms"><span class="tag">Deferred</span><b>Fine-tuned models</b><p>Retrieval plus careful prompting is the v1 approach — cheap to change, and every answer stays traceable to a source.</p></li>
+      <li data-reveal style="--d:240ms"><span class="tag">Deferred</span><b>Referral &amp; affiliate schemes</b><p>Growth machinery bolted onto a product that hasn't proven retention is a distraction with a growth chart attached.</p></li>
+      <li data-reveal style="--d:300ms"><span class="tag">Deferred</span><b>A full admin dashboard</b><p>Just enough tooling to verify tutors by hand and settle disputes. Automation arrives when volume demands it.</p></li>
+    </ul>
+    <div class="tracks">
+      <p class="tag" style="color:var(--accent)" data-reveal>Build order — and the depth each step forces</p>
+      <div class="trow" data-reveal><span class="trow__n d">1</span><div><b>Auth and the two role profiles</b><p>Student and tutor accounts, profiles, subject tagging.</p></div><span class="trow__kind"><span class="kind kind--api">API</span><span class="kind kind--ui">UI</span></span></div>
+      <div class="trow" data-reveal style="--d:60ms"><span class="trow__n d">2</span><div><b>Booking state machine + escrow</b><p>The core systems problem, with no AI anywhere near it: transitions, holds, releases, idempotent webhooks.</p></div><span class="trow__kind"><span class="kind kind--api">API</span><span class="kind kind--opt">Money</span></span></div>
+      <div class="trow" data-reveal style="--d:120ms"><span class="trow__n d">3</span><div><b>Real-time chat</b><p>WebSockets per session, with offline queueing and retry for connections that drop mid-sentence.</p></div><span class="trow__kind"><span class="kind kind--api">API</span><span class="kind kind--ui">UI</span></span></div>
+      <div class="trow" data-reveal style="--d:180ms"><span class="trow__n d">4</span><div><b>Practice engine: retrieval + adaptive generation</b><p>Syllabus chunking and embedding, retrieval, structured outputs, difficulty tracking, generation logs.</p></div><span class="trow__kind"><span class="kind kind--ai">AI</span><span class="kind kind--api">API</span></span></div>
+      <div class="trow" data-reveal style="--d:240ms"><span class="trow__n d">5</span><div><b>Mobile app on shared logic</b><p>React Native reusing the same API clients, auth handling and validation schemas as the web app.</p></div><span class="trow__kind"><span class="kind kind--ui">UI</span></span></div>
+      <div class="trow" data-reveal style="--d:300ms"><span class="trow__n d">6</span><div><b>Optimisation pass</b><p>Query plans, model cost and caching, bundle size and list virtualisation — applied to a system that already works.</p></div><span class="trow__kind"><span class="kind kind--opt">Optimise</span></span></div>
+    </div>
+  </div>
+</section>
+<!-- ============================== FAQ ============================== -->
+<section class="sec" id="faq">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="chapter"><span class="tag">Chapter 10 — questions</span></p>
+      <h2 class="h2" data-reveal>Asked, answered honestly.</h2>
+      <p class="lede" data-reveal style="--d:80ms">Including the ones where the honest answer is "we haven't locked that down yet" — which is the useful kind of answer.</p>
+    </div>
+
+    <div class="faq">
+      <details class="q" data-reveal>
+        <summary>Which subjects does the pilot cover?<span class="q__fx" aria-hidden="true"><svg class="ic"><use href="#ic-plus"/></svg></span></summary>
+        <div class="q__a"><p>Mathematics, Use of English and Physics — through every part of the product: diagnostic, tutor matching, chat, adaptive practice. New subjects are added one at a time, once the one before it works end to end.</p></div>
+      </details>
+      <details class="q" data-reveal style="--d:50ms">
+        <summary>How are tutors verified?<span class="q__fx" aria-hidden="true"><svg class="ic"><use href="#ic-plus"/></svg></span></summary>
+        <div class="q__a"><p>By hand, for the pilot: credentials are checked and every tutor does a short interview before their profile can be booked. We'd rather over-verify a hundred tutors than under-verify a thousand — but it does mean onboarding is slow on purpose right now.</p></div>
+      </details>
+      <details class="q" data-reveal style="--d:100ms">
+        <summary>What happens if someone doesn't show up?<span class="q__fx" aria-hidden="true"><svg class="ic"><use href="#ic-plus"/></svg></span></summary>
+        <div class="q__a"><p>The fee sits in escrow from the moment a booking is confirmed until the session is marked complete. If the student doesn't show, the tutor keeps the fee that was already held. If the tutor doesn't show, the student is refunded automatically — no support ticket required. <b>The exact cancellation window is still being finalised</b> and will be published in writing before the first paid session.</p></div>
+      </details>
+      <details class="q" data-reveal style="--d:150ms">
+        <summary>Is the AI practice really free?<span class="q__fx" aria-hidden="true"><svg class="ic"><use href="#ic-plus"/></svg></span></summary>
+        <div class="q__a"><p>Yes, with a daily question cap. Circle+ (₦1,500/month) removes the cap and adds a weekly weak-spot report. Model calls cost real money per question, so the cap is what keeps the free tier alive — it isn't a trick to upsell you.</p></div>
+      </details>
+      <details class="q" data-reveal style="--d:200ms">
+        <summary>My network is unreliable. Will this still work?<span class="q__fx" aria-hidden="true"><svg class="ic"><use href="#ic-plus"/></svg></span></summary>
+        <div class="q__a"><p>That's an assumption we build on, not an edge case. Chat queues messages locally and retries when the connection returns, and the practice engine is text rather than video, so a slow link still works. Offline handling lands in the pilot, before the mobile app does.</p></div>
+      </details>
+      <details class="q" data-reveal style="--d:250ms">
+        <summary>Where does the syllabus content come from?<span class="q__fx" aria-hidden="true"><svg class="ic"><use href="#ic-plus"/></svg></span></summary>
+        <div class="q__a"><p><b>Still being confirmed.</b> The engine retrieves from a curated syllabus corpus, and we want that sourcing and licensing settled in the open rather than quietly scraped. Until it is, every explanation in the pilot shows which syllabus topic it came from, so a student can check it themselves.</p></div>
+      </details>
+      <details class="q" data-reveal style="--d:300ms">
+        <summary>Who's building this, and why like this?<span class="q__fx" aria-hidden="true"><svg class="ic"><use href="#ic-plus"/></svg></span></summary>
+        <div class="q__a"><p>A small team in Nigeria, deliberately. StudyCircle doubles as a learning project: every feature is chosen because it forces real depth in backend systems, retrieval-augmented AI, cross-platform frontend work, or optimisation. Depth over breadth — in the product, and in how it's built.</p></div>
+      </details>
+      <details class="q" data-reveal style="--d:350ms">
+        <summary>Does the demo on this page actually work?<span class="q__fx" aria-hidden="true"><svg class="ic"><use href="#ic-plus"/></svg></span></summary>
+        <div class="q__a"><p>The adaptive selection runs for real — in your browser, with no server involved. The question bank behind it was hand-written for this page, and it says so. Anything simulated on this page is labelled as simulated on the page itself.</p></div>
+      </details>
+    </div>
+  </div>
+</section>
+<!-- ============================== JOIN ============================== -->
+<section class="sec sec--alt" id="join">
+  <div class="wrap join">
+    <p class="chapter" style="width:min(56rem,100%)"><span class="tag">Join the pilot</span></p>
+    <h2 class="h2" data-reveal>Get in the <span class="circ">circle<svg viewBox="0 0 132 62" preserveAspectRatio="none" aria-hidden="true"><path d="M12 34C8 14 44 6 74 8c32 2 50 12 48 26-2 16-36 23-72 21-30-2-42-9-36-23 5-12 44-19 78-15" pathLength="1"/></svg></span>.</h2>
+    <p class="lede" data-reveal style="--d:80ms">We're onboarding the first students and tutors now. One email, no card, and we'll reach out before the pilot opens.</p>
+
+    <div class="join-card" id="joinCard" data-reveal style="--d:140ms">
+      <form id="joinForm" novalidate>
+        <div class="seg" id="roleSeg" role="group" aria-label="I am joining as">
+          <button type="button" class="is-on" data-role="student"><svg class="ic" aria-hidden="true"><use href="#ic-cap"/></svg>I'm a student</button>
+          <button type="button" data-role="tutor"><svg class="ic" aria-hidden="true"><use href="#ic-verified"/></svg>I'm a tutor</button>
+        </div>
+        <div class="fieldrow">
+          <div class="field">
+            <label for="joinEmail">Email</label>
+            <input id="joinEmail" type="email" inputmode="email" autocomplete="email" placeholder="you@example.com">
+          </div>
+          <div class="field">
+            <label for="joinExam" id="joinExamLabel">Target exam</label>
+            <select id="joinExam">
+              <option value="jamb-2026">JAMB · 2026</option>
+              <option value="waec-2026">WAEC · 2026</option>
+              <option value="neco-2026">NECO · 2026</option>
+              <option value="jamb-2027">JAMB · 2027</option>
+              <option value="unsure">Not sure yet</option>
+            </select>
+          </div>
+        </div>
+        <p class="err" id="joinErr" role="alert"></p>
+        <div class="join-submit">
+          <button class="btn btn--accent btn--block" type="submit">Reserve my spot<svg class="ic" aria-hidden="true"><use href="#ic-arrow-r"/></svg></button>
+        </div>
+        <p class="join-fine">
+          <span>₦0 to join · leave any time · we don't share your email</span>
+          <span>Nothing here is a payment, and no card is collected</span>
+        </p>
+      </form>
+    </div>
+  </div>
+</section>
+</main>
+<!-- ============================== FOOTER ============================== -->
+<footer class="foot">
+  <div class="wrap foot-grid">
+    <div>
+      <a class="brand" href="#top"><span class="brand-mark" aria-hidden="true"></span>StudyCircle</a>
+      <p class="mt-m">Verified tutors you can book, and an AI engine that refuses to let go of the topics you keep failing. Built in Nigeria, for JAMB, WAEC and NECO.</p>
+      <p class="honest">No invented statistics on this page.<br>Simulated sections are labelled as simulated.<br>Pilot pricing · Lagos, Nigeria</p>
+    </div>
+    <div class="foot-col">
+      <span class="tag">Product</span>
+      <a href="#demo">Live adaptive demo</a>
+      <a href="#booking">How a booking works</a>
+      <a href="#ai">Inside the AI engine</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">Questions</a>
+    </div>
+    <div class="foot-col">
+      <span class="tag">People</span>
+      <a href="#join">Join as a student</a>
+      <a href="#tutors">Join as a tutor</a>
+      <a href="#subjects">Pilot subjects</a>
+      <a href="#metrics">What we measure</a>
+    </div>
+  </div>
+  <div class="wrap foot-bar">
+    <span>© 2025 StudyCircle — Lagos, Nigeria</span>
+    <span>Depth over breadth</span>
+    <span>FastAPI · Postgres · React · React Native</span>
+  </div>
+</footer>
+
+<div class="mcta" id="mcta">
+  <p><b>Pilot is opening</b>Students and tutors, take the first spots.</p>
+  <a class="btn btn--marker btn--sm" href="#join">Join the pilot</a>
+</div>
+
+<div id="toasts" aria-live="polite" aria-atomic="false"></div>
+
+<script>
+/* ==========================================================================
+   StudyCircle landing page — vanilla JS, no dependencies, no build step.
+   ========================================================================== */
+var $ = function(sel, ctx){ return (ctx || document).querySelector(sel); };
+var $$ = function(sel, ctx){ return Array.prototype.slice.call((ctx || document).querySelectorAll(sel)); };
+function on(el, ev, fn){ if (el) el.addEventListener(ev, fn); }
+function txt(el, value){ if (el) el.textContent = value; }
+function show(el, yes){ if (el) el.hidden = !yes; }
+var REDUCED = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+function esc(value){
+  var s = String(value), out = '', i, ch;
+  var map = { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' };
+  for (i = 0; i < s.length; i++){ ch = s.charAt(i); out += map[ch] || ch; }
+  return out;
+}
+function node(html){
+  var d = document.createElement('div');
+  d.innerHTML = html;
+  return d.firstElementChild;
+}
+
+/* ---------- toasts ---------- */
+function toast(msg, icon){
+  var box = $('#toasts');
+  if (!box) return;
+  var t = node('<div class="toast"><svg class="ic" aria-hidden="true"><use href="#' + (icon || 'ic-check') + '"/></svg><span></span></div>');
+  t.lastElementChild.textContent = msg;
+  box.appendChild(t);
+  while (box.children.length > 3) box.removeChild(box.firstElementChild);
+  setTimeout(function(){
+    t.classList.add('is-out');
+    setTimeout(function(){ if (t.parentNode) t.parentNode.removeChild(t); }, 380);
+  }, 3600);
+}
+
+/* ---------- nav, progress bar, scrollspy, mobile CTA ---------- */
+var nav = $('#nav'), prog = $('#prog'), burger = $('#burger'), mnav = $('#mnav'), mcta = $('#mcta');
+var spySections = ['why','how','subjects','booking','ai','demo','tutors','pricing','metrics','faq','join']
+  .map(function(id){ return document.getElementById(id); })
+  .filter(function(el){ return !!el; });
+var navLinks = $$('.nav-links a');
+
+on(burger, 'click', function(){
+  var open = mnav.classList.toggle('is-open');
+  burger.classList.toggle('is-x', open);
+  burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+  burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+});
+$$('#mnav a').forEach(function(a){
+  on(a, 'click', function(){
+    mnav.classList.remove('is-open');
+    burger.classList.remove('is-x');
+    burger.setAttribute('aria-expanded', 'false');
+  });
+});
+
+var ticking = false;
+function onScroll(){
+  var y = window.pageYOffset || document.documentElement.scrollTop;
+  var max = document.documentElement.scrollHeight - window.innerHeight;
+  if (nav) nav.classList.toggle('is-stuck', y > 8);
+  if (prog) prog.style.width = (max > 12 ? Math.min(100, (y / max) * 100) : 0) + '%';
+  if (mcta) mcta.classList.toggle('is-up', y > 520);
+  var active = null, i, rect;
+  for (i = 0; i < spySections.length; i++){
+    rect = spySections[i].getBoundingClientRect();
+    if (rect.top <= 150) active = spySections[i].id;
+  }
+  navLinks.forEach(function(a){
+    var target = a.getAttribute('href');
+    a.classList.toggle('is-active', target === '#' + active);
+  });
+  ticking = false;
+}
+on(window, 'scroll', function(){
+  if (!ticking){ ticking = true; window.requestAnimationFrame(onScroll); }
+}, { passive: true });
+onScroll();
+
+/* ---------- reveal on scroll ---------- */
+if ('IntersectionObserver' in window && !REDUCED){
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if (entry.isIntersecting){
+        entry.target.classList.add('in');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.14, rootMargin: '0px 0px -6% 0px' });
+  $$('[data-reveal]').forEach(function(el){ io.observe(el); });
+} else {
+  $$('[data-reveal]').forEach(function(el){ el.classList.add('in'); });
+}
+
+/* ---------- smooth anchor scroll (respecting reduced motion) ---------- */
+$$('a[href^="#"]').forEach(function(a){
+  on(a, 'click', function(e){
+    var id = a.getAttribute('href');
+    if (id === '#' || id.length < 2) return;
+    var target = document.getElementById(id.slice(1));
+    if (!target) return;
+    e.preventDefault();
+    target.scrollIntoView({ behavior: REDUCED ? 'auto' : 'smooth', block: 'start' });
+    history.replaceState(null, '', id);
+  });
+});
+/* ---------- hero thread preview (scripted, labelled as such) ---------- */
+var threadLog = $('#threadLog');
+var THREAD = [
+  { who: 'me', text: 'Integration by substitution keeps eating my marks in past papers.' },
+  { who: 'tutor', text: 'That one ruins a lot of people. Let me pull the assistant into this thread — it will show you the actual pattern.' },
+  { who: 'ai', text: 'Here is the pattern: choose u so that du is already sitting in your integrand. In the integral of 2x(x\u00b2 + 1)\u00b3 dx, take u = x\u00b2 + 1 \u2014 then du = 2x dx, which is exactly the factor left over. The whole thing collapses to the integral of u\u00b3 du.',
+    cite: 'JAMB Mathematics syllabus \u00b7 calculus \u2014 integration' },
+  { who: 'event', text: 'Booking confirmed \u00b7 \u20a61,200 held in escrow' },
+  { who: 'me', text: 'ohh \u2014 it clicked. that is clearer than my textbook' },
+  { who: 'tutor', text: 'Good. Same pattern, three more questions before Friday, and the engine keeps drilling it with you in between.' },
+  { who: 'event', text: 'Session completed \u00b7 \u20a61,200 released from escrow' }
+];
+var CANNED = [
+  'In the live app this is answered against your exact syllabus topic, with the retrieved source shown under the answer. The demo further down the page is where you can watch the difficulty move.',
+  'Good question. Every explanation in the product is grounded in retrieved syllabus content and stored with its source, so nothing is quietly improvised.',
+  'If you want to see the engine actually work rather than a scripted preview, tap the diagnostic button and answer five questions.'
+];
+var threadTimers = [], cannedI = 0, userTook = false;
+
+function threadScroll(){
+  if (threadLog) threadLog.scrollTop = threadLog.scrollHeight;
+}
+function threadPush(msg){
+  if (!threadLog) return;
+  var el;
+  if (msg.who === 'event'){
+    el = node('<p class="tevent"></p>');
+    el.textContent = msg.text;
+  } else if (msg.who === 'ai'){
+    el = node('<div class="tmsg tmsg--ai"><p class="ai-head"><svg class="ic" aria-hidden="true"><use href="#ic-spark"/></svg>SC\u00b7AI assistant</p><p class="ai-body"></p><p><span class="src"><svg class="ic" aria-hidden="true"><use href="#ic-doc"/></svg><span class="src-text"></span></span></p></div>');
+    el.querySelector('.ai-body').textContent = msg.text;
+    el.querySelector('.src-text').textContent = msg.cite;
+  } else {
+    el = node('<div class="tmsg ' + (msg.who === 'me' ? 'tmsg--me' : 'tmsg--tutor') + '"></div>');
+    el.textContent = msg.text;
+  }
+  threadLog.appendChild(el);
+  threadScroll();
+}
+function threadTyping(cls){
+  var el = node('<div class="tt ' + cls + '" aria-hidden="true"><span></span><span></span><span></span></div>');
+  threadLog.appendChild(el);
+  threadScroll();
+  return el;
+}
+function playThread(){
+  if (!threadLog) return;
+  threadTimers.forEach(clearTimeout);
+  threadTimers = [];
+  threadLog.innerHTML = '';
+  userTook = false;
+  var i = 0;
+  (function step(){
+    if (userTook) return;
+    if (i >= THREAD.length){
+      threadTimers.push(setTimeout(function(){ if (!userTook) playThread(); }, 6200));
+      return;
+    }
+    var msg = THREAD[i++];
+    if (msg.who === 'event'){
+      threadPush(msg);
+      threadTimers.push(setTimeout(step, REDUCED ? 200 : 900));
+      return;
+    }
+    var bubble = REDUCED ? null : threadTyping(msg.who === 'me' ? 'tt--me' : '');
+    var wait = REDUCED ? 150 : Math.min(1900, 620 + msg.text.length * 11);
+    threadTimers.push(setTimeout(function(){
+      if (bubble && bubble.parentNode) threadLog.removeChild(bubble);
+      threadPush(msg);
+      threadTimers.push(setTimeout(step, REDUCED ? 120 : 700));
+    }, wait));
+  })();
+}
+if (threadLog && 'IntersectionObserver' in window){
+  var threadIO = new IntersectionObserver(function(entries, obs){
+    if (entries[0].isIntersecting){ playThread(); obs.disconnect(); }
+  }, { threshold: 0.25 });
+  threadIO.observe($('#threadCard'));
+} else {
+  playThread();
+}
+on($('#threadReplay'), 'click', function(){
+  playThread();
+  toast('Replaying the preview thread', 'ic-refresh');
+});
+on($('#threadForm'), 'submit', function(e){
+  e.preventDefault();
+  var input = $('#threadInput');
+  if (!input) return;
+  var value = input.value.trim();
+  if (!value) return;
+  userTook = true;
+  threadTimers.forEach(clearTimeout);
+  threadTimers = [];
+  $$('.tt', threadLog).forEach(function(t){ if (t.parentNode) threadLog.removeChild(t); });
+  threadPush({ who: 'me', text: value });
+  input.value = '';
+  var bubble = threadTyping('');
+  setTimeout(function(){
+    if (bubble && bubble.parentNode) threadLog.removeChild(bubble);
+    threadPush({ who: 'ai', text: CANNED[cannedI % CANNED.length], cite: 'scripted preview \u00b7 not a live model' });
+    cannedI += 1;
+  }, REDUCED ? 200 : 1400);
+});
+/* ---------- question bank: Mathematics (hand-written for this page) ---------- */
+var BANK = {
+  math: {
+    1: [
+      { id:'m1', topic:'Brackets & simplification', q:'Simplify:  3(2x \u2212 4) + 5x', a:1,
+        opts:['6x \u2212 12','11x \u2212 12','16x \u2212 4','11x + 12'],
+        why:'Expand the bracket first: 3(2x \u2212 4) = 6x \u2212 12. Then collect the like terms: 6x + 5x = 11x. The classic trap is stopping at 6x \u2212 12 and forgetting the + 5x sitting behind it.',
+        src:'JAMB Mathematics syllabus \u2014 algebraic processes' },
+      { id:'m2', topic:'Percentages', q:'A past-question book marked \u20a68,000 is advertised at \u201c25% off\u201d. What do you actually pay?', a:2,
+        opts:['\u20a61,500','\u20a62,000','\u20a66,000','\u20a65,500'],
+        why:'25% off means you pay 75%: 0.75 \u00d7 \u20a68,000 = \u20a66,000. The \u20a62,000 option is the discount itself \u2014 a misread that costs real marks every exam year.',
+        src:'JAMB Mathematics syllabus \u2014 number & numeration' },
+      { id:'m3', topic:'Linear equations', q:'Solve for x:  2x + 3 = 4x \u2212 7', a:2,
+        opts:['x = \u22125','x = 2','x = 5','x = 3.5'],
+        why:'Collect x on one side and numbers on the other: 3 + 7 = 4x \u2212 2x, so 10 = 2x and x = 5. Almost every lost mark here comes from the sign flip that happens when 2x crosses the equals sign.',
+        src:'JAMB Mathematics syllabus \u2014 algebraic processes' }
+    ],
+    2: [
+      { id:'m4', topic:'Factorisation', q:'Factorise:  x\u00b2 \u2212 5x + 6', a:0,
+        opts:['(x \u2212 2)(x \u2212 3)','(x + 2)(x + 3)','(x \u2212 1)(x \u2212 6)','(x + 1)(x \u2212 6)'],
+        why:'You need two numbers that multiply to +6 and add to \u22125: those are \u22122 and \u22123, so x\u00b2 \u2212 5x + 6 = (x \u2212 2)(x \u2212 3). If the middle term were +5x, both signs would flip \u2014 the signs are the whole question.',
+        src:'JAMB Mathematics syllabus \u2014 algebraic processes' },
+      { id:'m5', topic:'Simultaneous equations', q:'Solve:  3x \u2212 2y = 8  and  x + y = 6', a:0,
+        opts:['x = 4, y = 2','x = 2, y = 4','x = 5, y = 1','x = 3, y = 3'],
+        why:'From the second equation, x = 6 \u2212 y. Substituting: 3(6 \u2212 y) \u2212 2y = 8, so 18 \u2212 5y = 8 and y = 2, which gives x = 4. Check it back: 3(4) \u2212 2(2) = 8. That check takes four seconds and catches the swap trap.',
+        src:'JAMB Mathematics syllabus \u2014 algebraic processes' },
+      { id:'m6', topic:'Indices', q:'Simplify:  (2\u00b3 \u00d7 2\u2074) \u00f7 2\u2075', a:0,
+        opts:['4','8','16','2'],
+        why:'Same base, so add the indices when multiplying and subtract when dividing: 2\u00b3 \u207a \u2074 \u2212 \u2075 = 2\u00b2 = 4. Multiplying the indices instead of adding them is the standard wrong turn here.',
+        src:'JAMB Mathematics syllabus \u2014 indices & logarithms' }
+    ],
+    3: [
+      { id:'m7', topic:'Arithmetic progression', q:'The 5th term of an A.P. is 11 and the 8th term is 20. Find the first term.', a:0,
+        opts:['\u22121','1','2','5'],
+        why:'T\u2099 = a + (n \u2212 1)d gives a + 4d = 11 and a + 7d = 20. Subtracting: 3d = 9, so d = 3 and a = 11 \u2212 4(3) = \u22121. First terms are allowed to be negative \u2014 that is not a sign you got it wrong.',
+        src:'JAMB Mathematics syllabus \u2014 sequences & series' },
+      { id:'m8', topic:'Integration', q:'Evaluate:  \u222b(3x\u00b2 + 2x) dx', a:0,
+        opts:['x\u00b3 + x\u00b2 + c','6x + 2 + c','x\u00b3 + 2x + c','3x\u00b3 + x\u00b2 + c'],
+        why:'Integrate term by term \u2014 raise the power by one, then divide by the new power: \u222b3x\u00b2dx = x\u00b3 and \u222b2x dx = x\u00b2. Option B is what differentiating would have given you, and dropping the constant c quietly costs a mark on its own.',
+        src:'JAMB Mathematics syllabus \u2014 calculus: integration' },
+      { id:'m9', topic:'Logarithms', q:'Given log10 2 = 0.3010 and log10 3 = 0.4771, evaluate log10 6.', a:0,
+        opts:['0.7781','0.1761','0.1436','1.0791'],
+        why:'6 = 2 \u00d7 3, and the log of a product is the sum of the logs: 0.3010 + 0.4771 = 0.7781. The 0.1761 option is the subtraction \u2014 that is the log of 3 \u00f7 2, a division question wearing a multiplication question\u2019s clothes.',
+        src:'JAMB Mathematics syllabus \u2014 indices & logarithms' }
+    ]
+  }
+};
+/* ---------- question bank: Use of English ---------- */
+BANK.english = {
+  1: [
+    { id:'e1', topic:'Plural forms', q:'The plural of \u201ccrisis\u201d is:', a:1,
+      opts:['crisises','crises','crisis\u2019s','crisis'],
+      why:'Nouns ending in -is swap to -es: crisis \u2192 crises, analysis \u2192 analyses, thesis \u2192 theses. It is Greek heritage showing through, and examiners know that most candidates guess.',
+      src:'WAEC English syllabus \u2014 lexis & structure' },
+    { id:'e2', topic:'Antonyms', q:'Choose the word most OPPOSITE in meaning to \u201cbrave\u201d.', a:2,
+      opts:['bold','fearless','cowardly','courageous'],
+      why:'Three of these options mean exactly the same as brave \u2014 that is the design, not an accident. Only \u201ccowardly\u201d points the other way. Test each option against the instruction instead of grabbing the first familiar word.',
+      src:'WAEC English syllabus \u2014 antonyms' },
+    { id:'e3', topic:'Synonyms', q:'Choose the option NEAREST in meaning to \u201cfragile\u201d.', a:1,
+      opts:['sturdy','delicate','enormous','ancient'],
+      why:'Fragile means easily broken, so delicate is nearest. \u201cSturdy\u201d is the exact opposite parked in option A \u2014 a favourite trick in synonym questions.',
+      src:'WAEC English syllabus \u2014 synonyms' }
+  ],
+  2: [
+    { id:'e4', topic:'Concord', q:'\u201cNeither of the boys ___ present at the assembly.\u201d', a:1,
+      opts:['were','was','are','have been'],
+      why:'\u201cNeither\u201d is singular, so it takes a singular verb: was. The plural noun sitting right next to the gap exists to pull you towards \u201cwere\u201d. Concord questions appear every single year.',
+      src:'WAEC English syllabus \u2014 structure: concord' },
+    { id:'e5', topic:'Vocabulary', q:'Choose the option NEAREST in meaning to \u201cubiquitous\u201d.', a:1,
+      opts:['rare and costly','found everywhere','very old','recently invented'],
+      why:'Something ubiquitous exists everywhere at once. Wide reading is the long-term fix; spotting the shape of the distractors is the short-term one.',
+      src:'WAEC English syllabus \u2014 vocabulary' },
+    { id:'e6', topic:'Idiomatic usage', q:'\u201cTo let the cat out of the bag\u201d means:', a:1,
+      opts:['to free an animal','to reveal a secret','to cause a quarrel','to act carelessly'],
+      why:'It means to reveal something that was meant to be hidden \u2014 usually by accident. Idioms are tested as whole units: translating them word by word is what makes the wrong options look reasonable.',
+      src:'JAMB Use of English \u2014 idioms & idiomatic expressions' }
+  ],
+  3: [
+    { id:'e7', topic:'Correlatives', q:'\u201cHardly had he arrived ___ the lights went out.\u201d', a:0,
+      opts:['when','than','before','that'],
+      why:'\u201cHardly had \u2026 when \u2026\u201d is the fixed pair, exactly like \u201cNo sooner had \u2026 than \u2026\u201d. The trap is that \u201cthan\u201d belongs with no sooner, not with hardly \u2014 once the sentence opens with \u201cHardly had\u201d, the second half is already decided.',
+      src:'JAMB Use of English \u2014 structure: correlatives' },
+    { id:'e8', topic:'Vocabulary', q:'The word \u201cperfidious\u201d most nearly means:', a:1,
+      opts:['deeply loyal','treacherous','straightforward','prosperous'],
+      why:'A perfidious person betrays trust, so treacherous is the meaning. \u201cLoyal\u201d is the designed trap: it is the exact antonym, placed one option away from the answer.',
+      src:'JAMB Use of English \u2014 vocabulary' },
+    { id:'e9', topic:'Vocabulary in context', q:'\u201cThe senator\u2019s speech was full of platitudes.\u201d Here, \u201cplatitudes\u201d means:', a:1,
+      opts:['fresh insights','trite, overused remarks','bitter truths','technical jargon'],
+      why:'A platitude is a remark that sounds meaningful and says nothing \u2014 trite and overused. The point of the word is criticism, which is why \u201cfresh insights\u201d is the wrong direction entirely.',
+      src:'JAMB Use of English \u2014 vocabulary in context' }
+  ]
+};
+/* ---------- question bank: Physics ---------- */
+BANK.physics = {
+  1: [
+    { id:'p1', topic:'Units & measurement', q:'The SI unit of force is the:', a:1,
+      opts:['joule','newton','watt','pascal'],
+      why:'Force is measured in newtons \u2014 one newton is 1 kg\u00b7m/s\u00b2. The joule measures energy, the watt measures power, the pascal measures pressure. Unit questions are free marks if the table stays straight in your head.',
+      src:'WAEC Physics syllabus \u2014 measurement & units' },
+    { id:'p2', topic:'Scalars & vectors', q:'Which of the following is a vector quantity?', a:2,
+      opts:['speed','mass','velocity','temperature'],
+      why:'A vector has both magnitude and direction. Velocity is speed with a direction attached, so it qualifies. Speed, mass and temperature do not care which way they are pointing.',
+      src:'WAEC Physics syllabus \u2014 vectors & scalars' },
+    { id:'p3', topic:'Fundamental quantities', q:'Which of these is a fundamental (base) quantity?', a:2,
+      opts:['force','energy','current','pressure'],
+      why:'Current is one of the base quantities, with its own SI unit, the ampere. Force, energy and pressure are all derived \u2014 each of them is defined in terms of mass, length, time or current.',
+      src:'WAEC Physics syllabus \u2014 units & dimensions' }
+  ],
+  2: [
+    { id:'p4', topic:'Kinematics', q:'A body\u2019s velocity rises from 4 m/s to 12 m/s in 2 seconds. Its acceleration is:', a:0,
+      opts:['4 m/s\u00b2','6 m/s\u00b2','8 m/s\u00b2','2 m/s\u00b2'],
+      why:'a = (v \u2212 u) \u00f7 t = (12 \u2212 4) \u00f7 2 = 4 m/s\u00b2. The trap is dividing the final velocity by time instead of the change in velocity \u2014 acceleration never cares about your destination.',
+      src:'WAEC Physics syllabus \u2014 motion' },
+    { id:'p5', topic:'Current electricity', q:'A current of 3 A flows through a 4 \u03a9 resistor. The potential difference across it is:', a:2,
+      opts:['7 V','1.33 V','12 V','0.75 V'],
+      why:'Ohm\u2019s law: V = IR = 3 \u00d7 4 = 12 V. Option A is what adding instead of multiplying gets you. Write the formula down before touching the numbers and this question cannot go wrong.',
+      src:'WAEC Physics syllabus \u2014 current electricity' },
+    { id:'p6', topic:'Work & energy', q:'A force of 20 N pulls a box 5 m along the ground at 60\u00b0 to the horizontal. The work done is:', a:1,
+      opts:['100 J','50 J','86.6 J','0 J'],
+      why:'W = Fd cos\u03b8 = 20 \u00d7 5 \u00d7 cos 60\u00b0 = 20 \u00d7 5 \u00d7 0.5 = 50 J. The 100 J option is force times distance with the angle quietly ignored \u2014 which is the whole reason the angle was given.',
+      src:'WAEC Physics syllabus \u2014 work, energy & power' }
+  ],
+  3: [
+    { id:'p7', topic:'Machines', q:'A machine has an efficiency of 60% and a velocity ratio of 5. Its mechanical advantage is:', a:0,
+      opts:['3','2.5','8.33','5'],
+      why:'Efficiency = (MA \u00f7 VR) \u00d7 100%, so MA = 0.6 \u00d7 5 = 3. A machine never hands you something for nothing \u2014 friction takes the other 40%, and this is the arithmetic that proves it.',
+      src:'WAEC Physics syllabus \u2014 machines' },
+    { id:'p8', topic:'Radioactivity', q:'A radioactive substance has a half-life of 4 days. What fraction of it remains after 12 days?', a:2,
+      opts:['1/2','1/4','1/8','1/16'],
+      why:'12 days is exactly three half-lives, and each one halves whatever is left: 1 \u2192 \u00bd \u2192 \u00bc \u2192 \u215b. The half-life itself never changes, no matter how little of the sample survives.',
+      src:'WAEC Physics syllabus \u2014 radioactivity' },
+    { id:'p9', topic:'Resultant of forces', q:'Two forces of 6 N and 8 N act at right angles to each other. Their resultant is:', a:1,
+      opts:['14 N','10 N','2 N','48 N'],
+      why:'Right angles mean Pythagoras: \u221a(6\u00b2 + 8\u00b2) = \u221a100 = 10 N. Straight addition gives 14 N and subtraction gives 2 N \u2014 both are what you get by ignoring the direction, which is the one thing a vector will not let you do.',
+      src:'WAEC Physics syllabus \u2014 vectors & scalars' }
+  ]
+};
+/* ---------- adaptive practice demo: state, selection, rendering ---------- */
+var LVL_LABEL = { 1:'Warm-up', 2:'Steady', 3:'Standard', 4:'Sharp', 5:'Exam-final' };
+var SUBJECTS = { math:'Mathematics', english:'Use of English', physics:'Physics' };
+var VERDICT = {
+  1:'Everyone starts somewhere. The point of an adaptive engine is that it starts where you are, not where the syllabus wishes you were.',
+  2:'Foundations are forming. Keep answering \u2014 the engine stays with a topic until the explanation lands.',
+  3:'Solid standard level, which is where most candidates sit. Targeted drilling is what moves you off this rung quickly.',
+  4:'Sharp. A few more runs and the hard tier stops feeling like the hard tier.',
+  5:'You are operating at exam-final level. In the product, the engine would keep hunting for the topic that finally breaks you.'
+};
+var RUN = 5;
+var QS = { subject:'math', i:0, level:3, used:{}, hist:[], cur:null, locked:false, running:false };
+
+function tierOf(level){ return level <= 2 ? 1 : (level === 3 ? 2 : 3); }
+function tierOrder(tier){
+  var order = [tier];
+  if (tier > 1) order.push(tier - 1);
+  if (tier < 3) order.push(tier + 1);
+  if (tier === 1) order.push(3);
+  if (tier === 3) order.push(1);
+  return order;
+}
+function pickQuestion(){
+  var order = tierOrder(tierOf(QS.level)), i, t, pool, available;
+  for (i = 0; i < order.length; i++){
+    t = order[i];
+    pool = BANK[QS.subject][t] || [];
+    available = pool.filter(function(q){ return !QS.used[q.id]; });
+    if (available.length){
+      var chosen = available[Math.floor(Math.random() * available.length)];
+      QS.used[chosen.id] = true;
+      return chosen;
+    }
+  }
+  return null;
+}
+function meterColor(level){
+  if (level <= 2) return 'var(--accent)';
+  if (level === 3) return 'var(--brand-2)';
+  return 'var(--brand)';
+}
+function paintMeter(fillEl, numEl, lblEl, level){
+  if (fillEl){ fillEl.style.width = (level * 20) + '%'; fillEl.style.background = meterColor(level); }
+  txt(numEl, level);
+  txt(lblEl, LVL_LABEL[level]);
+}
+function paintStats(){
+  var ok = QS.hist.filter(function(h){ return h.ok; }).length;
+  txt($('#statQ'), Math.min(QS.i + 1, RUN));
+  txt($('#statOk'), ok);
+  txt($('#statNo'), QS.hist.length - ok);
+}
+function renderQuestion(){
+  var q = QS.cur;
+  if (!q) return finishRun();
+  QS.locked = false;
+  txt($('#qTopic'), 'Topic \u2014 ' + q.topic);
+  txt($('#qDiff'), 'Level ' + QS.level + ' \u00b7 ' + LVL_LABEL[QS.level]);
+  txt($('#qText'), q.q);
+  txt($('#qProg'), 'Question ' + (QS.i + 1) + ' of ' + RUN);
+  txt($('#keyHint'), 'Press 1\u20134 to answer, then Enter for the next question');
+  var box = $('#qOpts');
+  box.innerHTML = '';
+  q.opts.forEach(function(option, index){
+    var letter = 'ABCD'.charAt(index);
+    var b = node('<button class="opt" type="button"><span class="opt__key" aria-hidden="true">' + letter + '</span><span class="opt__text"></span></button>');
+    b.querySelector('.opt__text').textContent = option;
+    b.setAttribute('aria-label', 'Option ' + letter + ': ' + option);
+    on(b, 'click', function(){ answerQuestion(index); });
+    box.appendChild(b);
+  });
+  var why = $('#qWhy');
+  if (why) why.classList.remove('is-on');
+  var stamp = $('#qStamp');
+  if (stamp) stamp.className = 'stamp';
+  show($('#qNext'), false);
+  show($('#qStart'), false);
+  paintStats();
+}
+function answerQuestion(index){
+  if (!QS.running || QS.locked || !QS.cur) return;
+  QS.locked = true;
+  var q = QS.cur, ok = index === q.a, before = QS.level;
+  $$('.opt', $('#qOpts')).forEach(function(btn, j){
+    btn.disabled = true;
+    if (j === q.a) btn.classList.add('is-ok');
+    else if (j === index) btn.classList.add('is-no');
+    else btn.classList.add('is-dim');
+  });
+  var stamp = $('#qStamp');
+  if (stamp){
+    stamp.className = 'stamp is-on ' + (ok ? 'stamp--ok' : 'stamp--no');
+    stamp.textContent = ok ? 'Correct' : 'Not quite';
+  }
+  QS.hist.push({ topic: q.topic, ok: ok, lvl: before });
+  QS.level = ok ? Math.min(5, before + 1) : Math.max(1, before - 1);
+  paintMeter($('#meterFill'), $('#meterNum'), $('#meterLbl'), QS.level);
+  paintStats();
+  txt($('#qWhyText'), q.why);
+  var cite = $('#qCite');
+  if (cite){
+    cite.innerHTML = '<svg class="ic" aria-hidden="true"><use href="#ic-doc"/></svg><span></span>';
+    cite.lastElementChild.textContent = q.src;
+  }
+  txt($('#qAdapt'), ok
+    ? (before === 5 ? '\u2192 That is exam-final work. Holding at the top.' : '\u2192 Clean. Moving you up a level.')
+    : (before === 1 ? '\u2192 Staying at warm-up. We build from here.' : '\u2192 Easing back a level so the next one sticks.'));
+  var why = $('#qWhy');
+  if (why) why.classList.add('is-on');
+  var next = $('#qNext');
+  if (next){
+    next.innerHTML = (QS.i === RUN - 1 ? 'See my diagnostic' : 'Next question') + '<svg class="ic" aria-hidden="true"><use href="#ic-arrow-r"/></svg>';
+    show(next, true);
+    next.focus();
+  }
+  txt($('#keyHint'), 'Enter for the next question');
+}
+/* ---------- adaptive practice demo: run control, result, keyboard ---------- */
+function nextQuestion(){
+  if (!QS.running || !QS.locked) return;
+  QS.i += 1;
+  if (QS.i >= RUN) return finishRun();
+  QS.cur = pickQuestion();
+  renderQuestion();
+}
+function finishRun(){
+  QS.running = false;
+  show($('#qCard'), false);
+  show($('#qResult'), true);
+  txt($('#qResSubject'), SUBJECTS[QS.subject]);
+  paintMeter($('#rMeterFill'), $('#rMeterNum'), $('#rMeterLbl'), QS.level);
+  txt($('#qVerdict'), VERDICT[QS.level]);
+  var recap = $('#qRecap');
+  recap.innerHTML = '';
+  QS.hist.forEach(function(h, i){
+    var row = node('<div class="rrow"><span class="idx"></span><span class="topic"></span><span class="lvl"></span><svg class="ic" aria-hidden="true"><use href="#ic-check"/></svg></div>');
+    txt(row.querySelector('.idx'), 'Q' + (i + 1));
+    txt(row.querySelector('.topic'), h.topic);
+    txt(row.querySelector('.lvl'), 'L' + h.lvl);
+    var mark = row.lastElementChild;
+    mark.classList.add(h.ok ? 'ok' : 'no');
+    mark.querySelector('use').setAttribute('href', h.ok ? '#ic-check' : '#ic-x');
+    recap.appendChild(row);
+  });
+  var weak = [], seen = {}, list = $('#qWeakList');
+  QS.hist.forEach(function(h){
+    if (!h.ok && !seen[h.topic]){ seen[h.topic] = true; weak.push(h.topic); }
+  });
+  list.innerHTML = '';
+  if (weak.length){
+    weak.forEach(function(topic){
+      var li = document.createElement('li');
+      li.textContent = topic;
+      list.appendChild(li);
+    });
+    txt($('#qWeak').querySelector('.tag'), 'Drill these next \u2014 ' + weak.length + ' weak spot' + (weak.length > 1 ? 's' : ''));
+  } else {
+    var li = document.createElement('li');
+    li.textContent = 'Nothing missed this run. Run it again \u2014 that is the honest next step.';
+    list.appendChild(li);
+    txt($('#qWeak').querySelector('.tag'), 'No weak spots in this run');
+  }
+  var saved = null;
+  try {
+    saved = { subject: QS.subject, level: QS.level, weak: weak, at: Date.now() };
+    window.localStorage.setItem('studycircle:lastRun', JSON.stringify(saved));
+  } catch (err) { saved = null; }
+  var note = node('<p class="mono" style="display:block;margin-top:.9rem;color:var(--ink-3)"></p>');
+  note.textContent = saved
+    ? 'Saved to this browser only \u2014 in the product this profile follows you into every topic.'
+    : 'This browser blocked local storage, so this run was not saved. The demo still worked.';
+  var cta = $('.result-cta');
+  if (cta && !$('#qSaveNote')) { note.id = 'qSaveNote'; cta.parentNode.insertBefore(note, cta); }
+  toast('Diagnostic complete \u2014 level ' + QS.level + ' \u00b7 ' + LVL_LABEL[QS.level], 'ic-target');
+  var result = $('#qResult');
+  if (result) result.scrollIntoView({ behavior: REDUCED ? 'auto' : 'smooth', block: 'nearest' });
+}
+function startRun(subject, scrollToDemo){
+  if (!BANK[subject]) subject = 'math';
+  QS.subject = subject;
+  QS.i = 0; QS.level = 3; QS.used = {}; QS.hist = []; QS.locked = false; QS.running = true;
+  show($('#qResult'), false);
+  show($('#qCard'), true);
+  show($('#qIntro'), false);
+  show($('#qRun'), true);
+  var note = $('#qSaveNote');
+  if (note && note.parentNode) note.parentNode.removeChild(note);
+  $$('#subjTabs .stab').forEach(function(b){ b.classList.toggle('is-on', b.getAttribute('data-sub') === subject); });
+  paintMeter($('#meterFill'), $('#meterNum'), $('#meterLbl'), 3);
+  paintStats();
+  QS.cur = pickQuestion();
+  renderQuestion();
+  if (scrollToDemo){
+    var demo = $('#demo');
+    if (demo) demo.scrollIntoView({ behavior: REDUCED ? 'auto' : 'smooth', block: 'start' });
+  }
+}
+on($('#qStart'), 'click', function(){ startRun(QS.subject, false); });
+on($('#qNext'), 'click', nextQuestion);
+on($('#qReset'), 'click', function(){
+  startRun(QS.subject, false);
+  toast('Fresh run \u2014 back to level 3', 'ic-refresh');
+});
+on($('#qAgain'), 'click', function(){
+  var order = ['math', 'english', 'physics'];
+  var next = order[(order.indexOf(QS.subject) + 1) % order.length];
+  startRun(next, false);
+  toast(SUBJECTS[next] + ' loaded \u2014 new diagnostic ready', 'ic-book');
+});
+on($('#qSave'), 'click', function(){
+  setRole('student');
+  var join = $('#join');
+  if (join) join.scrollIntoView({ behavior: REDUCED ? 'auto' : 'smooth', block: 'start' });
+  toast('Diagnostic noted \u2014 now take your pilot spot', 'ic-spark');
+});
+$$('#subjTabs .stab').forEach(function(b){
+  on(b, 'click', function(){ startRun(b.getAttribute('data-sub'), false); });
+});
+$$('.book').forEach(function(b){
+  on(b, 'click', function(){
+    var sub = b.getAttribute('data-sub');
+    startRun(sub, false);
+    var demo = $('#demo');
+    if (demo) demo.scrollIntoView({ behavior: REDUCED ? 'auto' : 'smooth', block: 'start' });
+    toast(SUBJECTS[sub] + ' loaded into the demo below', 'ic-book');
+  });
+});
+on(document, 'keydown', function(e){
+  if (!QS.running) return;
+  var tag = (e.target && e.target.tagName ? e.target.tagName.toLowerCase() : '');
+  if (tag === 'input' || tag === 'select' || tag === 'textarea') return;
+  if (!QS.locked){
+    var n = '1234'.indexOf(e.key);
+    if (n > -1 && n < (QS.cur ? QS.cur.opts.length : 0)){
+      e.preventDefault();
+      answerQuestion(n);
+    }
+    return;
+  }
+  if (e.key === 'Enter' || e.key === ' '){
+    e.preventDefault();
+    nextQuestion();
+  }
+});
+paintMeter($('#meterFill'), $('#meterNum'), $('#meterLbl'), 3);
+paintStats();
+/* ---------- booking state machine: state definitions ---------- */
+var FLOW_ORDER = ['requested', 'confirmed', 'in_progress', 'completed'];
+var FLOW = {
+  requested: {
+    title: 'Requested', code: 'requested',
+    body: 'Tomiwa requests Chidinma\u2019s Tuesday slot. Nothing has been charged \u2014 a request is not a purchase, and it lapses on its own if nobody confirms it.',
+    list: ['Tutor can confirm, or let it expire', 'Student can cancel with no fee and no argument', 'No payment intent exists yet'],
+    api: 'POST /bookings \u2192 201 \u00b7 { state: "requested" }',
+    ledger: [ { label: 'Escrow held', amount: '\u20a60' }, { label: 'Student charged', amount: '\u20a60' } ],
+    next: 'confirmed'
+  },
+  confirmed: {
+    title: 'Confirmed', code: 'confirmed',
+    body: 'Chidinma confirms, and the fee moves into escrow. The tutor now has proof the money exists; the student keeps a clean path to getting it back if the session never happens.',
+    list: ['Fee held, not paid out', 'A commitment both sides can see', 'Payment confirmed by webhook \u2014 never by the client claiming success'],
+    api: 'POST /bookings/1042/confirm \u2192 200 \u00b7 webhook: charge.successful',
+    ledger: [ { label: 'Into escrow (student)', amount: '\u20a61,200', kind: 'hold' }, { label: 'Paid to tutor', amount: '\u20a60' } ],
+    next: 'in_progress'
+  },
+  in_progress: {
+    title: 'In progress', code: 'in_progress',
+    body: 'The session runs in the in-app thread. Halfway through, Chidinma pulls the AI assistant into the same conversation to unpack the substitution pattern \u2014 tutor and engine share one transcript.',
+    list: ['Messages queue offline and resend on reconnect', 'Transcript becomes context for later practice', 'Escrow does not move from here'],
+    api: 'POST /bookings/1042/start \u2192 200 \u00b7 session channel opened',
+    ledger: [ { label: 'Held in escrow', amount: '\u20a61,200', kind: 'hold' }, { label: 'Paid to tutor', amount: '\u20a60' } ],
+    next: 'completed'
+  },
+  completed: {
+    title: 'Completed', code: 'completed',
+    body: 'Marked complete, and escrow releases: commission comes out, the tutor is paid, and both sides get a review prompt.',
+    list: ['12% commission on a completed session only', 'Payout to the tutor inside 24 hours', 'Weak-spot profile and reviews update'],
+    api: 'POST /bookings/1042/complete \u2192 200 \u00b7 escrow.release',
+    ledger: [ { label: 'Tutor receives (\u20a61,200 \u2212 12%)', amount: '\u20a61,056', kind: 'in' }, { label: 'Platform commission', amount: '\u20a6144', kind: 'out' } ],
+    next: null
+  },
+  cancelled: {
+    title: 'Cancelled', code: 'cancelled',
+    body: 'Cancelled before the session starts. If the fee was already in escrow it goes straight back to the student \u2014 no fee, no negotiation, no support ticket.',
+    list: ['Full automatic refund', 'Tutor loses nothing already earned', 'Repeat cancellations show on the account'],
+    api: 'POST /bookings/1042/cancel \u2192 200 \u00b7 refund.queued',
+    ledger: [ { label: 'Refunded to student', amount: '\u20a61,200', kind: 'in' }, { label: 'Platform commission', amount: '\u20a60' } ],
+    from: ['requested', 'confirmed'], branch: true
+  },
+  no_show: {
+    title: 'Tutor no-show', code: 'no_show',
+    body: 'The student turned up; the tutor did not. The refund is automatic and the tutor\u2019s reliability record takes the hit, not the student\u2019s wallet.',
+    list: ['Automatic refund, no dispute needed', 'Tutor flagged for manual review', 'Student can rebook with someone else immediately'],
+    api: 'POST /webhooks/payments \u2192 200 \u00b7 refund + flag (idempotency key honoured)',
+    ledger: [ { label: 'Refunded to student', amount: '\u20a61,200', kind: 'in' }, { label: 'Paid to tutor', amount: '\u20a60' } ],
+    from: ['requested', 'confirmed', 'in_progress'], branch: true
+  },
+  student_no_show: {
+    title: 'Student no-show', code: 'no_show',
+    body: 'The tutor blocked out the hour and the student never arrived. Because the fee was already held, the tutor is paid for the session they lost \u2014 the tutor\u2019s time is never the free option.',
+    list: ['Tutor paid from the held escrow', 'Commission still applies \u2014 a transaction did complete', 'Repeated no-shows restrict new bookings'],
+    api: 'POST /bookings/1042/no-show \u2192 200 \u00b7 escrow.release',
+    ledger: [ { label: 'Tutor receives as compensation', amount: '\u20a61,056', kind: 'in' }, { label: 'Platform commission', amount: '\u20a6144', kind: 'out' } ],
+    from: ['requested', 'confirmed', 'in_progress'], branch: true
+  }
+};
+var flowCurrent = 'requested';
+/* ---------- booking state machine: rendering ---------- */
+function renderFlow(key){
+  var state = FLOW[key];
+  if (!state) return;
+  flowCurrent = key;
+  var currentIndex = FLOW_ORDER.indexOf(key);
+  var rail = $('#flowRail');
+  rail.innerHTML = '';
+  FLOW_ORDER.forEach(function(id, index){
+    var s = FLOW[id];
+    var label = id === key ? 'viewing' : (index === currentIndex + 1 ? 'next step' : 'inspect');
+    var b = node('<button class="fstep" type="button"><span class="dot" aria-hidden="true"></span><span class="fstep__name"></span><span class="go"></span></button>');
+    b.querySelector('.fstep__name').innerHTML = esc(s.title) + '<span class="mono">' + (index + 1) + ' \u00b7 ' + esc(s.code) + '</span>';
+    txt(b.querySelector('.go'), label);
+    if (state.from && state.from.indexOf(id) > -1) b.classList.add('is-done');
+    else if (currentIndex > -1 && index < currentIndex) b.classList.add('is-done');
+    if (id === key) b.classList.add('is-now');
+    b.setAttribute('aria-label', 'View the ' + s.title + ' state');
+    b.setAttribute('aria-current', id === key ? 'true' : 'false');
+    on(b, 'click', function(){ renderFlow(id); });
+    rail.appendChild(b);
+  });
+  txt($('#flowTitle'), state.title);
+  txt($('#flowBody'), state.body);
+  var list = $('#flowList');
+  list.innerHTML = '';
+  state.list.forEach(function(item){
+    var li = node('<li><svg class="ic" aria-hidden="true"><use href="#ic-check"/></svg><span></span></li>');
+    li.lastElementChild.textContent = item;
+    list.appendChild(li);
+  });
+  var api = $('#flowApi');
+  api.innerHTML = '<b>' + esc(state.title) + '</b> \u00b7 ';
+  api.appendChild(document.createTextNode(state.api));
+  var ledger = $('#flowLedger');
+  ledger.innerHTML = '';
+  state.ledger.forEach(function(row){
+    var el = node('<p class="lrow' + (row.kind ? ' lrow--' + row.kind : '') + '"><span></span><i></i><b></b></p>');
+    txt(el.firstElementChild, row.label);
+    txt(el.lastElementChild, row.amount);
+    ledger.appendChild(el);
+  });
+}
+$$('.branches [data-branch]').forEach(function(b){
+  on(b, 'click', function(){ renderFlow(b.getAttribute('data-branch')); });
+});
+renderFlow('requested');
+/* ---------- AI / retrieval inspector (illustrative data) ---------- */
+var RAG = {
+  substitution: {
+    label: 'Integration by substitution',
+    subject: 'Mathematics',
+    query: 'practice questions on integration by substitution, JAMB level',
+    meta: '3 chunks \u00b7 top score 0.91',
+    chunks: [
+      { src: 'Maths syllabus \u00b7 calculus \u2014 integration', score: 0.91,
+        text: 'Candidates should be able to integrate simple algebraic expressions, and to use a change of variable so that a composite integrand reduces to a standard form.' },
+      { src: 'Maths syllabus \u00b7 calculus \u2014 techniques', score: 0.84,
+        text: 'The substitution u = f(x) is useful when the derivative of f appears as a factor of the integrand. Remember to express the final answer in terms of the original variable.' },
+      { src: 'Maths syllabus \u00b7 calculus \u2014 definite integrals', score: 0.62,
+        text: 'For definite integrals, either convert the limits to the new variable, or substitute back before evaluating between the original limits.' }
+    ],
+    json: '{\n  "topic": "integration by substitution",\n  "difficulty": 4,\n  "question": "Evaluate \u222b 2x(x\u00b2 + 1)\u00b3 dx",\n  "options": ["(x\u00b2 + 1)\u2074 / 4 + c", "2(x\u00b2 + 1)\u00b3 + c", "(x\u00b2 + 1)\u2074 + c", "x\u00b2(x\u00b2 + 1)\u00b3 + c"],\n  "answer": 0,\n  "explanation": "Let u = x\u00b2 + 1, so du = 2x dx \u2014 the leftover factor. The integral becomes \u222b u\u00b3 du = u\u2074/4 + c.",\n  "cited_sources": [1, 2],\n  "logged": true\n}'
+  },
+  concord: {
+    label: 'Concord & subject-verb agreement',
+    subject: 'Use of English',
+    query: 'practice on concord, especially neither/either and collective nouns',
+    meta: '3 chunks \u00b7 top score 0.88',
+    chunks: [
+      { src: 'English syllabus \u00b7 structure \u2014 concord', score: 0.88,
+        text: 'The verb agrees with its subject in number and person. Where a phrase intervenes between subject and verb, the number of the true subject governs.' },
+      { src: 'English syllabus \u00b7 pronouns & determiners', score: 0.79,
+        text: 'Neither, either, each and every are treated as singular and take singular verbs, even when followed by a plural noun.' },
+      { src: 'English syllabus \u00b7 structure \u2014 collective nouns', score: 0.57,
+        text: 'Collective nouns take a singular verb when the group acts as one unit, and a plural verb when members act individually.' }
+    ],
+    json: '{\n  "topic": "concord",\n  "difficulty": 3,\n  "question": "Neither of the boys ___ present at the assembly.",\n  "options": ["were", "was", "are", "have been"],\n  "answer": 1,\n  "explanation": "Neither is singular, so the verb takes the singular form: was. The plural noun nearby is a distractor, not the subject.",\n  "cited_sources": [1],\n  "logged": true\n}'
+  },
+  machines: {
+    label: 'Machines & efficiency',
+    subject: 'Physics',
+    query: 'practice on machines, efficiency and mechanical advantage',
+    meta: '3 chunks \u00b7 top score 0.86',
+    chunks: [
+      { src: 'Physics syllabus \u00b7 machines', score: 0.86,
+        text: 'For a simple machine, efficiency = (mechanical advantage / velocity ratio) \u00d7 100%. Efficiency is always less than 100% in practice because of friction.' },
+      { src: 'Physics syllabus \u00b7 work & energy', score: 0.74,
+        text: 'Work input equals work output plus energy lost to friction and heat. Energy is conserved, but it is not always usefully transferred.' },
+      { src: 'Physics syllabus \u00b7 levers & pulleys', score: 0.61,
+        text: 'The velocity ratio depends only on the geometry of the machine, while the mechanical advantage also depends on the load and the friction in the system.' }
+    ],
+    json: '{\n  "topic": "machines and efficiency",\n  "difficulty": 4,\n  "question": "A machine has an efficiency of 60% and a velocity ratio of 5. Its mechanical advantage is:",\n  "options": ["3", "2.5", "8.33", "5"],\n  "answer": 0,\n  "explanation": "Efficiency = (MA / VR) \u00d7 100%, so MA = 0.6 \u00d7 5 = 3. The missing 40% is friction.",\n  "cited_sources": [0, 1],\n  "logged": true\n}'
+  }
+};
+var ragKey = 'substitution';
+
+function paintRag(key){
+  var item = RAG[key];
+  if (!item) return;
+  ragKey = key;
+  $$('#ragPresets .preset').forEach(function(b){
+    b.classList.toggle('is-on', b.getAttribute('data-rag') === key);
+  });
+  var chunks = $('#ragChunks');
+  chunks.innerHTML = '';
+  item.chunks.forEach(function(c){
+    var el = node('<article class="chunk"><header><span class="src"></span><span class="score"></span></header><p class="body"></p><span class="bar"><i></i></span></article>');
+    txt(el.querySelector('.src'), c.src);
+    txt(el.querySelector('.score'), c.score.toFixed(2));
+    txt(el.querySelector('.body'), c.text);
+    chunks.appendChild(el);
+    setTimeout(function(){ el.querySelector('.bar i').style.width = (c.score * 100) + '%'; }, 60);
+  });
+  txt($('#ragMeta'), item.meta);
+  txt($('#ragQuery'), 'query: ' + item.query + '  \u00b7  subject: ' + item.subject);
+  txt($('#ragJson'), item.json);
+}
+(function buildPresets(){
+  var box = $('#ragPresets');
+  if (!box) return;
+  Object.keys(RAG).forEach(function(key){
+    var item = RAG[key];
+    var b = node('<button class="preset" type="button"><svg class="ic" aria-hidden="true"><use href="#ic-doc"/></svg><span><b></b><span class="mono"></span></span></button>');
+    txt(b.querySelector('b'), item.label);
+    txt(b.querySelector('.mono'), item.subject + ' \u00b7 ' + item.chunks.length + ' retrievable chunks');
+    b.setAttribute('data-rag', key);
+    on(b, 'click', function(){ paintRag(key); });
+    box.appendChild(b);
+  });
+  paintRag('substitution');
+})();
+/* ---------- tutor payout estimate ---------- */
+var WEEKS = 4.33, COMMISSION = 0.12;
+function money(n){
+  var v = Math.round(n), neg = v < 0, s = String(Math.abs(v)), out = '', i, c = 0;
+  for (i = s.length - 1; i >= 0; i--){
+    out = s.charAt(i) + out;
+    c += 1;
+    if (c % 3 === 0 && i > 0) out = ',' + out;
+  }
+  return (neg ? '\u2212' : '') + '\u20a6' + out;
+}
+function tween(el, to, asMoney){
+  if (!el) return;
+  var from = typeof el.__v === 'number' ? el.__v : to;
+  el.__v = to;
+  if (REDUCED){ txt(el, asMoney ? money(to) : String(Math.round(to))); return; }
+  var t0 = null;
+  window.requestAnimationFrame(function step(ts){
+    if (!t0) t0 = ts;
+    var p = Math.min(1, (ts - t0) / 380);
+    var e = 1 - Math.pow(1 - p, 3);
+    var v = from + (to - from) * e;
+    txt(el, asMoney ? money(v) : String(Math.round(v)));
+    if (p < 1) window.requestAnimationFrame(step);
+  });
+}
+function paintRange(el){
+  if (!el) return;
+  var min = Number(el.min), max = Number(el.max), v = Number(el.value);
+  var p = ((v - min) / (max - min)) * 100;
+  el.style.background = 'linear-gradient(to right,var(--brand-2) ' + p + '%,var(--line) ' + p + '%)';
+}
+function calcPayout(){
+  var sessions = $('#pSessions'), rate = $('#pRate');
+  if (!sessions || !rate) return;
+  var s = Number(sessions.value), r = Number(rate.value);
+  txt($('#vSessions'), s);
+  txt($('#vRate'), money(r));
+  var gross = s * WEEKS * r, fee = gross * COMMISSION;
+  tween($('#vStudent'), r, true);
+  tween($('#vGross'), gross, true);
+  tween($('#vFee'), -fee, true);
+  tween($('#vNet'), gross - fee, true);
+  paintRange(sessions);
+  paintRange(rate);
+}
+on($('#pSessions'), 'input', calcPayout);
+on($('#pRate'), 'input', calcPayout);
+$$('[data-preset]').forEach(function(b){
+  on(b, 'click', function(){
+    var kind = b.getAttribute('data-preset'), rates = { starter: [3, 1000], steady: [6, 1200], full: [12, 2000] };
+    var pair = rates[kind];
+    if (!pair) return;
+    $('#pSessions').value = pair[0];
+    $('#pRate').value = pair[1];
+    calcPayout();
+    toast('Estimate set to ' + pair[0] + ' sessions at ' + money(pair[1]), 'ic-wallet');
+  });
+});
+calcPayout();
+
+/* ---------- scratch card (Circle+) ---------- */
+(function scratch(){
+  var wrap = $('#scratchWrap'), cv = $('#scratchCanvas');
+  if (!wrap || !cv || !cv.getContext) return;
+  var ctx = cv.getContext('2d');
+  var done = false, down = false, dpr = 1;
+  cv.setAttribute('tabindex', '0');
+  cv.setAttribute('role', 'button');
+  cv.setAttribute('aria-label', 'Reveal what Circle+ includes');
+  function reveal(){
+    if (done) return;
+    done = true;
+    wrap.classList.add('is-done');
+    toast('Unlimited practice \u2014 that is the whole difference', 'ic-spark');
+  }
+  function paint(){
+    if (done) return;
+    var rect = cv.getBoundingClientRect();
+    dpr = window.devicePixelRatio || 1;
+    if (rect.width < 2 || rect.height < 2) return;
+    cv.width = Math.round(rect.width * dpr);
+    cv.height = Math.round(rect.height * dpr);
+    ctx.globalCompositeOperation = 'source-over';
+    ctx.fillStyle = '#BFC6B7';
+    ctx.fillRect(0, 0, cv.width, cv.height);
+    ctx.strokeStyle = 'rgba(20,24,20,.10)';
+    ctx.lineWidth = 7;
+    var x;
+    for (x = -cv.height; x < cv.width; x += 24){
+      ctx.beginPath();
+      ctx.moveTo(x, 0);
+      ctx.lineTo(x + cv.height, cv.height);
+      ctx.stroke();
+    }
+    ctx.fillStyle = 'rgba(20,24,20,.62)';
+    ctx.font = '700 ' + Math.round(11 * dpr) + 'px ui-monospace,Consolas,monospace';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText('S C R A T C H   H E R E', cv.width / 2, cv.height / 2);
+  }
+  function erase(x, y){
+    ctx.globalCompositeOperation = 'destination-out';
+    ctx.beginPath();
+    ctx.arc(x * dpr, y * dpr, 17 * dpr, 0, Math.PI * 2);
+    ctx.fill();
+  }
+  function check(){
+    if (done) return;
+    var data = ctx.getImageData(0, 0, cv.width, cv.height).data;
+    var clear = 0, n = 0, i;
+    for (i = 3; i < data.length; i += 4 * 31){ n += 1; if (data[i] === 0) clear += 1; }
+    if (n && clear / n > 0.5) reveal();
+  }
+  function pos(e){
+    var rect = cv.getBoundingClientRect();
+    return [e.clientX - rect.left, e.clientY - rect.top];
+  }
+  on(cv, 'pointerdown', function(e){
+    if (done) return;
+    down = true;
+    if (cv.setPointerCapture) cv.setPointerCapture(e.pointerId);
+    var p = pos(e);
+    erase(p[0], p[1]);
+  });
+  on(cv, 'pointermove', function(e){
+    if (!down || done) return;
+    var p = pos(e);
+    erase(p[0], p[1]);
+  });
+  ['pointerup', 'pointercancel', 'pointerleave'].forEach(function(ev){
+    on(cv, ev, function(){ if (down){ down = false; setTimeout(check, 60); } });
+  });
+  on(cv, 'keydown', function(e){
+    if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); reveal(); }
+  });
+  on(window, 'resize', paint);
+  paint();
+})();
+/* ---------- join form + role switching + section CTAs ---------- */
+var EXAMS = {
+  student: [['jamb-2026','JAMB \u00b7 2026'],['waec-2026','WAEC \u00b7 2026'],['neco-2026','NECO \u00b7 2026'],['jamb-2027','JAMB \u00b7 2027'],['unsure','Not sure yet']],
+  tutor: [['math','Mathematics'],['english','Use of English'],['physics','Physics'],['multi','More than one subject']]
+};
+var LABELS = { student: 'Target exam', tutor: 'Main subject' };
+var role = 'student';
+
+function setRole(next){
+  role = (EXAMS[next] ? next : 'student');
+  $$('#roleSeg button').forEach(function(b){
+    b.classList.toggle('is-on', b.getAttribute('data-role') === role);
+    b.setAttribute('aria-pressed', b.getAttribute('data-role') === role ? 'true' : 'false');
+  });
+  var sel = $('#joinExam');
+  if (sel){
+    sel.innerHTML = '';
+    EXAMS[role].forEach(function(pair){
+      var o = document.createElement('option');
+      o.value = pair[0];
+      o.textContent = pair[1];
+      sel.appendChild(o);
+    });
+  }
+  txt($('#joinExamLabel'), LABELS[role]);
+}
+$$('#roleSeg button').forEach(function(b){
+  on(b, 'click', function(){ setRole(b.getAttribute('data-role')); });
+});
+setRole('student');
+
+function looksLikeEmail(value){
+  if (!value || value.length < 6 || value.indexOf(' ') > -1) return false;
+  var at = value.indexOf('@');
+  if (at < 1 || at !== value.lastIndexOf('@')) return false;
+  var domain = value.slice(at + 1);
+  if (domain.length < 4 || domain.indexOf('..') > -1) return false;
+  var dot = domain.lastIndexOf('.');
+  if (dot < 1 || dot === domain.length - 1) return false;
+  return domain.slice(dot + 1).length >= 2;
+}
+function clearError(){
+  txt($('#joinErr'), '');
+  var input = $('#joinEmail');
+  if (input) input.classList.remove('shake');
+}
+on($('#joinEmail'), 'input', clearError);
+
+on($('#joinForm'), 'submit', function(e){
+  e.preventDefault();
+  var input = $('#joinEmail'), value = input ? input.value.trim() : '';
+  if (!looksLikeEmail(value)){
+    txt($('#joinErr'), 'That email does not look right \u2014 check it and try again.');
+    if (input){
+      input.classList.add('shake');
+      input.focus();
+      setTimeout(function(){ input.classList.remove('shake'); }, 420);
+    }
+    return;
+  }
+  var exam = $('#joinExam');
+  var pick = exam && exam.options[exam.selectedIndex] ? exam.options[exam.selectedIndex].textContent : '';
+  var card = $('#joinCard');
+  if (!card) return;
+  card.innerHTML = '<div class="ok-card"><span class="ok-card__ic"><svg class="ic" aria-hidden="true"><use href="#ic-check"/></svg></span>' +
+    '<h3 class="h3">You are on the list.</h3>' +
+    '<p class="small">We will reach out at <b></b> before the pilot opens. You joined as a <b></b><span class="examPick"></span> \u2014 nothing was charged and no card was taken.</p>' +
+    '<p class="mono" style="color:var(--brand)">No card required \u00b7 leave any time \u00b7 we do not share your email</p></div>';
+  var strongs = $$('b', card);
+  txt(strongs[0], value);
+  txt(strongs[1], role);
+  txt(card.querySelector('.examPick'), pick ? ' (' + pick + ')' : '');
+  try {
+    window.localStorage.setItem('studycircle:pilotSignup', JSON.stringify({ role: role, exam: pick, at: Date.now() }));
+  } catch (err) { /* storage blocked, signup intent still shown */ }
+  toast('Spot reserved \u2014 we will be in touch before the pilot opens', 'ic-check');
+});
+
+function goJoin(nextRole, message, icon){
+  setRole(nextRole);
+  var join = $('#join');
+  if (join) join.scrollIntoView({ behavior: REDUCED ? 'auto' : 'smooth', block: 'start' });
+  toast(message, icon);
+}
+on($('#tutorCta'), 'click', function(){ goJoin('tutor', 'Tutor track selected \u2014 tell us where to reach you', 'ic-verified'); });
+on($('#freeCta'), 'click', function(){ goJoin('student', 'Free tier it is \u2014 take your pilot spot below', 'ic-check'); });
+on($('#plusCta'), 'click', function(){ goJoin('student', 'Circle+ noted at \u00a61,500/month \u2014 take your spot below', 'ic-spark'); });
+
+/* ---------- remember the last diagnostic run ---------- */
+(function recallRun(){
+  var intro = $('#qIntro');
+  if (!intro) return;
+  var raw = null;
+  try { raw = window.localStorage.getItem('studycircle:lastRun'); } catch (err) { raw = null; }
+  if (!raw) return;
+  var saved = null;
+  try { saved = JSON.parse(raw); } catch (err) { saved = null; }
+  if (!saved || !saved.subject) return;
+  var name = SUBJECTS[saved.subject] || saved.subject;
+  var row = node('<p class="row"><svg class="ic" aria-hidden="true"><use href="#ic-refresh"/></svg><span></span></p>');
+  row.lastElementChild.textContent = 'Last time on this browser: ' + name + ' at level ' + saved.level +
+    (saved.weak && saved.weak.length ? ', weak on ' + saved.weak.join(', ') : '') + '. Start again whenever you like.';
+  intro.appendChild(row);
+})();
+</script>
+</body>
+</html>
